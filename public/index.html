@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jaded Rose | Shop Women's Dresses | Jumpsuits | Skirts and More</title>
+<meta name="description" content="Discover elegance and glamour at Jaded Rose! Elevate your style with our exquisite collection of occasion and party wear dresses and jumpsuits.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Jost:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   JADED ROSE — redesign concept
+   Palette   : Ink #181310 · Ivory #F6F1E8 · Chalk #FDFBF6
+               Bordeaux #5E1F2A (from the Edith gown) · Bone line #E3D9C9
+   Type      : Italiana (display) · Jost (UI / body)
+   Signature : the arch — occasionwear is ceremony
+   ============================================================ */
+
+:root{
+  --ink:#181310;
+  --ink-soft:#3A322C;
+  --ivory:#F6F1E8;
+  --chalk:#FDFBF6;
+  --bordeaux:#5E1F2A;
+  --bordeaux-deep:#43141D;
+  --line:#E3D9C9;
+  --line-ink:rgba(24,19,16,.14);
+  --muted:#8A7E70;
+  --font-display:'Italiana', serif;
+  --font-ui:'Jost', sans-serif;
+  --ease:cubic-bezier(.22,.7,.25,1);
+  --arch:999px 999px 0 0;
+  --pad:clamp(20px, 4.5vw, 64px);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-ui);
+  font-weight:300;
+  background:var(--ivory);
+  color:var(--ink);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:var(--font-ui);cursor:pointer;background:none;border:none;color:inherit}
+ul{list-style:none}
+::selection{background:var(--bordeaux);color:var(--chalk)}
+
+:focus-visible{outline:2px solid var(--bordeaux);outline-offset:3px}
+
+.eyebrow{
+  font-size:11px;letter-spacing:.32em;text-transform:uppercase;
+  font-weight:400;color:var(--muted);
+}
+.display{
+  font-family:var(--font-display);
+  font-weight:400;line-height:1.02;letter-spacing:.01em;
+}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:16px 34px;font-size:12px;letter-spacing:.26em;text-transform:uppercase;
+  font-weight:400;border:1px solid var(--ink);color:var(--ink);
+  transition:background .35s var(--ease), color .35s var(--ease);
+}
+.btn:hover{background:var(--ink);color:var(--ivory)}
+.btn--solid{background:var(--ink);color:var(--ivory)}
+.btn--solid:hover{background:var(--bordeaux);border-color:var(--bordeaux);color:var(--chalk)}
+.btn--ghost-light{border-color:rgba(246,241,232,.55);color:var(--ivory)}
+.btn--ghost-light:hover{background:var(--ivory);color:var(--ink)}
+.btn--bordeaux{background:var(--bordeaux);border-color:var(--bordeaux);color:var(--chalk)}
+.btn--bordeaux:hover{background:var(--bordeaux-deep);border-color:var(--bordeaux-deep)}
+
+/* ---------- announcement ---------- */
+.announce{
+  background:var(--ink);color:var(--ivory);
+  font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;
+  text-align:center;padding:9px var(--pad);
+  position:relative;overflow:hidden;height:34px;
+}
+.announce span{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  opacity:0;transform:translateY(8px);
+  transition:opacity .6s var(--ease), transform .6s var(--ease);
+  padding:0 16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.announce span.is-on{opacity:1;transform:none}
+.announce em{font-style:normal;color:#D8B08C}
+
+/* ---------- header ---------- */
+.site-head{
+  position:sticky;top:0;z-index:60;
+  background:rgba(246,241,232,.92);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+  transition:box-shadow .3s var(--ease);
+}
+.site-head.is-scrolled{box-shadow:0 10px 30px rgba(24,19,16,.08)}
+.head-row{
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  padding:0 var(--pad);height:74px;gap:20px;
+}
+.head-left{display:flex;align-items:center;gap:26px}
+.brand img{height:34px;width:auto}
+.head-right{display:flex;align-items:center;justify-content:flex-end;gap:6px}
+.icon-btn{
+  position:relative;display:inline-flex;align-items:center;gap:8px;
+  padding:10px 12px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+}
+.icon-btn svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.4}
+.bag-count{
+  position:absolute;top:2px;right:2px;min-width:16px;height:16px;padding:0 4px;
+  background:var(--bordeaux);color:var(--chalk);border-radius:99px;
+  font-size:10px;letter-spacing:0;display:flex;align-items:center;justify-content:center;
+  transform:scale(0);transition:transform .3s var(--ease);
+}
+.bag-count.is-on{transform:scale(1)}
+.burger{display:none;flex-direction:column;gap:5px;padding:12px}
+.burger i{display:block;width:22px;height:1.5px;background:var(--ink)}
+
+/* ---------- nav ---------- */
+.main-nav{display:flex;justify-content:center;gap:2px;border-top:1px solid var(--line)}
+.main-nav>li{position:relative}
+.main-nav>li>a{
+  display:block;padding:14px 18px;font-size:11.5px;letter-spacing:.22em;
+  text-transform:uppercase;font-weight:400;position:relative;
+}
+.main-nav>li>a::after{
+  content:"";position:absolute;left:18px;right:18px;bottom:10px;height:1px;
+  background:var(--bordeaux);transform:scaleX(0);transform-origin:left;
+  transition:transform .3s var(--ease);
+}
+.main-nav>li:hover>a::after,
+.main-nav>li:focus-within>a::after{transform:scaleX(1)}
+.nav-sale>a{color:var(--bordeaux)}
+.dropdown{
+  position:absolute;top:100%;left:50%;transform:translate(-50%,10px);
+  min-width:230px;background:var(--chalk);border:1px solid var(--line);
+  padding:14px 0;opacity:0;visibility:hidden;
+  transition:opacity .28s var(--ease), transform .28s var(--ease), visibility .28s;
+  box-shadow:0 24px 50px rgba(24,19,16,.12);z-index:70;
+}
+.main-nav>li:hover>.dropdown,
+.main-nav>li:focus-within>.dropdown{opacity:1;visibility:visible;transform:translate(-50%,0)}
+.dropdown a{
+  display:block;padding:9px 26px;font-size:12.5px;letter-spacing:.06em;
+  transition:color .2s, padding .25s var(--ease);
+}
+.dropdown a:hover{color:var(--bordeaux);padding-left:32px}
+.dropdown .dd-label{
+  padding:6px 26px 10px;font-size:10px;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--muted);
+}
+
+/* ---------- mobile nav ---------- */
+.mob-nav{
+  position:fixed;inset:0;z-index:90;background:var(--ink);color:var(--ivory);
+  transform:translateX(-100%);transition:transform .5s var(--ease);
+  overflow-y:auto;padding:26px var(--pad) 60px;
+}
+.mob-nav.is-open{transform:none}
+.mob-nav-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:34px}
+.mob-nav-top img{height:30px}
+.mob-close{font-size:26px;line-height:1;padding:8px 12px}
+.mob-nav a{color:var(--ivory)}
+.mob-group{border-bottom:1px solid rgba(246,241,232,.14)}
+.mob-group>a,.mob-group>button{
+  display:flex;width:100%;justify-content:space-between;align-items:center;
+  padding:18px 2px;font-size:14px;letter-spacing:.24em;text-transform:uppercase;
+  text-align:left;color:var(--ivory);
+}
+.mob-group>button::after{content:"+";font-size:18px;transition:transform .3s var(--ease)}
+.mob-group.is-open>button::after{transform:rotate(45deg)}
+.mob-sub{max-height:0;overflow:hidden;transition:max-height .45s var(--ease)}
+.mob-group.is-open .mob-sub{max-height:480px}
+.mob-sub a{display:block;padding:10px 14px;font-size:13.5px;letter-spacing:.05em;color:rgba(246,241,232,.82)}
+.mob-sale>a{color:#D8A0A8}
+
+/* ---------- hero ---------- */
+.hero{
+  display:grid;grid-template-columns:minmax(420px,46%) 1fr;
+  min-height:calc(100vh - 140px);background:var(--ink);color:var(--ivory);
+}
+.hero-panel{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(48px,7vw,110px) var(--pad);position:relative;overflow:hidden;
+}
+.hero-panel .eyebrow{color:#B9A695;margin-bottom:26px}
+.hero-title{
+  font-size:clamp(52px,6.4vw,104px);color:var(--ivory);
+  text-transform:uppercase;
+}
+.hero-title .line{display:block;overflow:hidden}
+.hero-title .line span{display:block;transform:translateY(110%);animation:rise 1s var(--ease) forwards}
+.hero-title .line:nth-child(2) span{animation-delay:.12s}
+.hero-title .line:nth-child(3) span{animation-delay:.24s;color:#CE9AA3;font-style:normal}
+@keyframes rise{to{transform:none}}
+.hero-sub{
+  margin:30px 0 40px;max-width:400px;font-size:15px;font-weight:300;
+  color:rgba(246,241,232,.78);letter-spacing:.02em;
+}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:14px}
+.hero-foot{
+  position:absolute;bottom:26px;left:var(--pad);right:var(--pad);
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:rgba(246,241,232,.5);
+}
+.hero-media{position:relative;overflow:hidden}
+.hero-media img{
+  width:100%;height:100%;object-fit:cover;object-position:top center;
+  transform:scale(1.06);animation:heroSettle 2.2s var(--ease) forwards;
+}
+@keyframes heroSettle{to{transform:scale(1)}}
+.hero-media::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(to right, rgba(24,19,16,.28), transparent 40%);
+}
+.hero-chip{
+  position:absolute;bottom:30px;right:30px;z-index:2;
+  background:rgba(24,19,16,.7);backdrop-filter:blur(8px);
+  border:1px solid rgba(246,241,232,.25);color:var(--ivory);
+  padding:14px 20px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  display:flex;align-items:center;gap:12px;
+  transition:background .3s var(--ease);
+}
+.hero-chip:hover{background:var(--bordeaux)}
+.hero-chip b{font-weight:500}
+
+/* ---------- section scaffold ---------- */
+section{padding:clamp(64px,8vw,120px) var(--pad)}
+.sec-head{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:24px;
+  margin-bottom:clamp(34px,4vw,56px);
+}
+.sec-title{font-size:clamp(34px,4vw,58px);text-transform:uppercase}
+.sec-link{
+  font-size:11px;letter-spacing:.26em;text-transform:uppercase;white-space:nowrap;
+  border-bottom:1px solid var(--ink);padding-bottom:4px;
+  transition:color .25s, border-color .25s;
+}
+.sec-link:hover{color:var(--bordeaux);border-color:var(--bordeaux)}
+
+/* reveal on scroll */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease), transform .8s var(--ease)}
+.reveal.is-in{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001s !important;transition-duration:.001s !important}
+  .reveal{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+
+/* ---------- occasion rail (signature arches) ---------- */
+.occasions{padding-top:clamp(56px,7vw,100px)}
+.rail{
+  display:grid;grid-auto-flow:column;grid-auto-columns:clamp(200px,22vw,270px);
+  gap:clamp(14px,2vw,26px);overflow-x:auto;padding:6px 4px 22px;
+  scroll-snap-type:x mandatory;scrollbar-width:thin;scrollbar-color:var(--line) transparent;
+}
+.rail::-webkit-scrollbar{height:4px}
+.rail::-webkit-scrollbar-thumb{background:var(--line)}
+.occ{scroll-snap-align:start;text-align:center}
+.occ-frame{
+  border-radius:var(--arch);overflow:hidden;position:relative;
+  aspect-ratio:3/4.4;border:1px solid var(--line);background:var(--chalk);
+}
+.occ-frame img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.occ:hover .occ-frame img{transform:scale(1.05)}
+.occ-frame::after{
+  content:"";position:absolute;inset:0;border-radius:var(--arch);
+  box-shadow:inset 0 0 0 1px rgba(246,241,232,.35);
+}
+.occ-name{
+  margin-top:16px;font-size:12px;letter-spacing:.26em;text-transform:uppercase;
+  display:inline-block;position:relative;padding-bottom:5px;
+}
+.occ-name::after{
+  content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;
+  background:var(--bordeaux);transform:scaleX(0);transition:transform .35s var(--ease);
+}
+.occ:hover .occ-name::after{transform:scaleX(1)}
+
+/* ---------- favourites grid ---------- */
+.faves{background:var(--chalk);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:clamp(26px,3vw,40px)}
+.tab{
+  padding:10px 20px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  border:1px solid var(--line-ink);border-radius:99px;color:var(--ink-soft);
+  transition:all .3s var(--ease);
+}
+.tab:hover{border-color:var(--ink)}
+.tab.is-on{background:var(--ink);border-color:var(--ink);color:var(--ivory)}
+.grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:clamp(18px,2.4vw,34px) clamp(14px,1.8vw,26px);
+}
+.card{position:relative;display:flex;flex-direction:column}
+.card-media{
+  position:relative;overflow:hidden;background:var(--ivory);
+  aspect-ratio:3/4;border:1px solid var(--line);
+}
+.card-media img{width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .9s var(--ease)}
+.card:hover .card-media img{transform:scale(1.05)}
+.badge{
+  position:absolute;top:12px;left:12px;z-index:2;
+  background:var(--bordeaux);color:var(--chalk);
+  font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:6px 11px;
+}
+.badge--new{background:var(--ink)}
+.card-eye{
+  position:absolute;top:12px;right:12px;z-index:3;
+  width:38px;height:38px;border-radius:50%;
+  background:rgba(253,251,246,.9);border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transform:translateY(-6px);
+  transition:opacity .3s var(--ease), transform .3s var(--ease), background .2s;
+}
+.card-eye svg{width:17px;height:17px;stroke:var(--ink);fill:none;stroke-width:1.4}
+.card:hover .card-eye{opacity:1;transform:none}
+.card-eye:hover{background:var(--ink)}
+.card-eye:hover svg{stroke:var(--ivory)}
+.qadd{
+  position:absolute;left:0;right:0;bottom:0;z-index:3;
+  background:rgba(24,19,16,.88);backdrop-filter:blur(6px);color:var(--ivory);
+  transform:translateY(101%);transition:transform .4s var(--ease);
+  padding:12px 14px 14px;text-align:center;
+}
+.card:hover .qadd, .card.qadd-open .qadd{transform:none}
+.qadd-label{font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:rgba(246,241,232,.65);margin-bottom:9px}
+.qadd-sizes{display:flex;justify-content:center;gap:6px;flex-wrap:wrap}
+.qadd-sizes button{
+  min-width:34px;height:34px;border:1px solid rgba(246,241,232,.35);
+  color:var(--ivory);font-size:12px;letter-spacing:.04em;
+  transition:all .25s var(--ease);
+}
+.qadd-sizes button:hover{background:var(--ivory);color:var(--ink);border-color:var(--ivory)}
+.card-info{padding:16px 4px 0;display:flex;flex-direction:column;gap:5px;flex:1}
+.card-name{font-size:14px;font-weight:400;letter-spacing:.03em;line-height:1.45}
+.card-name a:hover{color:var(--bordeaux)}
+.card-meta{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.price{font-size:14px;font-weight:500;letter-spacing:.05em}
+.price--sale{color:var(--bordeaux)}
+.price-was{font-size:12.5px;color:var(--muted);text-decoration:line-through}
+.stars{font-size:11px;letter-spacing:.14em;color:var(--ink-soft)}
+.stars b{color:var(--bordeaux);font-weight:400}
+.stars span{color:var(--muted);letter-spacing:.02em}
+.mob-qadd-toggle{display:none}
+
+/* ---------- story band ---------- */
+.story{
+  background:var(--ink);color:var(--ivory);
+  display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(40px,6vw,110px);
+  align-items:center;
+}
+.story .eyebrow{color:#B9A695}
+.story-quote{
+  font-size:clamp(30px,3.6vw,52px);margin:22px 0 30px;color:var(--ivory);
+  line-height:1.18;
+}
+.story-quote em{font-style:normal;color:#CE9AA3}
+.story p.body{color:rgba(246,241,232,.72);max-width:480px;margin-bottom:36px;font-size:15px}
+.edit-tiles{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2vw,24px)}
+.edit-tile{position:relative;border-radius:var(--arch);overflow:hidden;aspect-ratio:3/4.3}
+.edit-tile img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.edit-tile:hover img{transform:scale(1.06)}
+.edit-tile figcaption{
+  position:absolute;inset:auto 0 0;padding:56px 16px 22px;text-align:center;
+  background:linear-gradient(to top, rgba(24,19,16,.85), transparent);
+  font-size:11px;letter-spacing:.28em;text-transform:uppercase;
+}
+.edit-tile:nth-child(2){margin-top:clamp(24px,3vw,44px)}
+
+/* ---------- reviews ---------- */
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,40px)}
+.review{
+  border:1px solid var(--line);background:var(--chalk);padding:34px 30px;
+  display:flex;flex-direction:column;gap:16px;
+}
+.review q{font-size:16px;line-height:1.65;quotes:"“" "”"}
+.review-by{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-top:auto}
+.review-stars{color:var(--bordeaux);font-size:13px;letter-spacing:.2em}
+
+/* ---------- service strip ---------- */
+.service{border-top:1px solid var(--line);padding-top:0;padding-bottom:0}
+.service-grid{display:grid;grid-template-columns:repeat(3,1fr)}
+.svc{
+  padding:clamp(34px,4vw,54px) clamp(18px,2.6vw,40px);text-align:center;
+  border-left:1px solid var(--line);
+}
+.svc:first-child{border-left:none}
+.svc h3{font-family:var(--font-display);font-size:24px;font-weight:400;text-transform:uppercase;margin-bottom:10px;letter-spacing:.04em}
+.svc p{font-size:13.5px;color:var(--ink-soft);max-width:280px;margin:0 auto}
+.svc a{border-bottom:1px solid var(--line-ink)}
+.svc a:hover{color:var(--bordeaux);border-color:var(--bordeaux)}
+
+/* ---------- footer ---------- */
+.foot{background:var(--ink);color:var(--ivory);padding:clamp(60px,7vw,96px) var(--pad) 36px}
+.foot a:hover{color:#CE9AA3}
+.foot-grid{
+  display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:clamp(34px,5vw,90px);
+  padding-bottom:clamp(44px,5vw,70px);border-bottom:1px solid rgba(246,241,232,.14);
+}
+.foot h4{font-size:11px;letter-spacing:.3em;text-transform:uppercase;font-weight:400;margin-bottom:20px;color:#B9A695}
+.foot-news p{color:rgba(246,241,232,.7);font-size:14px;max-width:380px;margin-bottom:24px}
+.news-form{display:flex;border-bottom:1px solid rgba(246,241,232,.4);max-width:400px}
+.news-form input{
+  flex:1;background:none;border:none;color:var(--ivory);
+  font-family:var(--font-ui);font-size:14px;letter-spacing:.04em;padding:12px 0;
+}
+.news-form input::placeholder{color:rgba(246,241,232,.4)}
+.news-form input:focus{outline:none}
+.news-form button{
+  font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--ivory);
+  padding:12px 0 12px 16px;transition:color .25s;
+}
+.news-form button:hover{color:#CE9AA3}
+.news-ok{margin-top:14px;font-size:13px;color:#CE9AA3;display:none}
+.foot-list li{margin-bottom:11px;font-size:13.5px;letter-spacing:.04em}
+.foot-base{
+  display:flex;flex-wrap:wrap;gap:22px;justify-content:space-between;align-items:center;
+  padding-top:30px;font-size:11px;letter-spacing:.12em;color:rgba(246,241,232,.5);
+}
+.pay-row{display:flex;flex-wrap:wrap;gap:8px}
+.pay{
+  border:1px solid rgba(246,241,232,.25);padding:4px 9px;font-size:10px;
+  letter-spacing:.1em;text-transform:uppercase;color:rgba(246,241,232,.75);
+}
+.currency-sel{
+  background:none;border:1px solid rgba(246,241,232,.3);color:var(--ivory);
+  font-family:var(--font-ui);font-size:11px;letter-spacing:.1em;padding:8px 12px;
+}
+.currency-sel option{color:var(--ink)}
+.foot-logo{height:40px;width:auto;margin-bottom:22px;opacity:.95}
+
+/* ---------- overlays / drawers / modals ---------- */
+.scrim{
+  position:fixed;inset:0;background:rgba(24,19,16,.5);backdrop-filter:blur(2px);
+  opacity:0;visibility:hidden;transition:opacity .4s var(--ease), visibility .4s;z-index:80;
+}
+.scrim.is-on{opacity:1;visibility:visible}
+body.is-locked{overflow:hidden}
+
+.drawer{
+  position:fixed;top:0;right:0;bottom:0;width:min(430px,100%);
+  background:var(--chalk);z-index:95;display:flex;flex-direction:column;
+  transform:translateX(102%);transition:transform .5s var(--ease);
+  box-shadow:-30px 0 70px rgba(24,19,16,.2);
+}
+.drawer.is-open{transform:none}
+.drawer-head{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:22px 26px;border-bottom:1px solid var(--line);
+}
+.drawer-head h3{font-family:var(--font-display);font-size:24px;font-weight:400;text-transform:uppercase;letter-spacing:.05em}
+.x-btn{font-size:24px;line-height:1;padding:6px 10px;transition:transform .3s var(--ease)}
+.x-btn:hover{transform:rotate(90deg)}
+.cart-body{flex:1;overflow-y:auto;padding:10px 26px}
+.cart-empty{padding:70px 20px;text-align:center;color:var(--muted)}
+.cart-empty .display{font-size:26px;color:var(--ink);margin-bottom:12px;text-transform:uppercase}
+.cart-line{
+  display:grid;grid-template-columns:82px 1fr auto;gap:16px;
+  padding:20px 0;border-bottom:1px solid var(--line);
+}
+.cart-line img{width:82px;height:104px;object-fit:cover;border:1px solid var(--line)}
+.cl-name{font-size:13.5px;line-height:1.4;margin-bottom:4px}
+.cl-size{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--line-ink)}
+.qty button{width:28px;height:28px;font-size:14px}
+.qty b{width:30px;text-align:center;font-size:13px;font-weight:400}
+.cl-right{display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between}
+.cl-price{font-size:13.5px;font-weight:500}
+.cl-remove{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid transparent}
+.cl-remove:hover{color:var(--bordeaux);border-color:var(--bordeaux)}
+.cart-foot{border-top:1px solid var(--line);padding:22px 26px 26px;background:var(--chalk)}
+.cart-sub{display:flex;justify-content:space-between;font-size:14px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+.cart-note{font-size:12px;color:var(--muted);margin-bottom:18px}
+.cart-foot .btn{width:100%}
+
+/* search overlay */
+.search-ov{
+  position:fixed;inset:0;z-index:95;background:var(--ivory);
+  transform:translateY(-102%);transition:transform .55s var(--ease);
+  display:flex;flex-direction:column;padding:30px var(--pad) 40px;
+}
+.search-ov.is-open{transform:none}
+.search-row{display:flex;align-items:center;gap:20px;border-bottom:1px solid var(--ink);padding-bottom:14px}
+.search-row svg{width:22px;height:22px;stroke:var(--ink);fill:none;stroke-width:1.3;flex:none}
+#searchInput{
+  flex:1;background:none;border:none;font-family:var(--font-display);
+  font-size:clamp(26px,4vw,44px);color:var(--ink);letter-spacing:.02em;
+}
+#searchInput::placeholder{color:var(--muted)}
+#searchInput:focus{outline:none}
+.search-hint{margin-top:14px;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+.search-results{
+  margin-top:30px;overflow-y:auto;display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:22px;
+}
+.sr-card{display:flex;gap:14px;align-items:center;border:1px solid var(--line);background:var(--chalk);padding:10px;text-align:left}
+.sr-card img{width:56px;height:72px;object-fit:cover}
+.sr-card b{display:block;font-weight:400;font-size:13px;line-height:1.35;margin-bottom:3px}
+.sr-card span{font-size:12px;color:var(--bordeaux);font-weight:500}
+.sr-card:hover{border-color:var(--ink)}
+
+/* modal (quick view / size guide) */
+.modal{
+  position:fixed;inset:0;z-index:96;display:flex;align-items:center;justify-content:center;
+  padding:20px;opacity:0;visibility:hidden;transition:opacity .35s var(--ease), visibility .35s;
+}
+.modal.is-open{opacity:1;visibility:visible}
+.modal-box{
+  background:var(--chalk);width:min(880px,100%);max-height:92vh;overflow-y:auto;
+  transform:translateY(20px);transition:transform .4s var(--ease);
+  border:1px solid var(--line);position:relative;
+}
+.modal.is-open .modal-box{transform:none}
+.modal-x{position:absolute;top:12px;right:14px;z-index:5}
+.qv{display:grid;grid-template-columns:1fr 1.1fr;gap:0}
+.qv-media{background:var(--ivory);padding:clamp(20px,3vw,40px);display:flex;align-items:flex-end;justify-content:center}
+.qv-media .frame{border-radius:var(--arch);overflow:hidden;border:1px solid var(--line);width:100%;max-width:330px;aspect-ratio:3/4.2}
+.qv-media img{width:100%;height:100%;object-fit:cover}
+.qv-info{padding:clamp(26px,3.4vw,48px)}
+.qv-info h3{font-family:var(--font-display);font-size:clamp(24px,2.6vw,34px);font-weight:400;line-height:1.12;margin:8px 0 10px}
+.qv-price-row{display:flex;align-items:baseline;gap:12px;margin-bottom:16px}
+.qv-price-row .price{font-size:19px}
+.qv-desc{font-size:14px;color:var(--ink-soft);margin-bottom:24px;max-width:420px}
+.qv-label{font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
+.qv-label button{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid var(--line-ink);color:var(--ink-soft)}
+.qv-label button:hover{color:var(--bordeaux);border-color:var(--bordeaux)}
+.size-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
+.size-row button{
+  min-width:44px;height:44px;border:1px solid var(--line-ink);font-size:13px;
+  transition:all .25s var(--ease);
+}
+.size-row button:hover{border-color:var(--ink)}
+.size-row button.is-on{background:var(--ink);color:var(--ivory);border-color:var(--ink)}
+.qv-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:stretch}
+.qv-actions .btn{flex:1;min-width:200px}
+.qv-full{display:inline-block;margin-top:20px;font-size:11px;letter-spacing:.24em;text-transform:uppercase;border-bottom:1px solid var(--line-ink)}
+.qv-full:hover{color:var(--bordeaux);border-color:var(--bordeaux)}
+.qv-service{margin-top:26px;padding-top:20px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted);display:grid;gap:6px}
+
+/* size guide */
+.sg-box{padding:clamp(28px,4vw,50px)}
+.sg-box h3{font-family:var(--font-display);font-size:32px;font-weight:400;text-transform:uppercase;margin-bottom:22px}
+.sg-table{width:100%;border-collapse:collapse;font-size:13px}
+.sg-table th,.sg-table td{border:1px solid var(--line);padding:10px 12px;text-align:center}
+.sg-table th{background:var(--ivory);font-weight:400;font-size:11px;letter-spacing:.18em;text-transform:uppercase}
+.sg-table td:first-child{font-weight:500;background:var(--ivory)}
+.sg-note{margin-top:18px;font-size:12.5px;color:var(--muted);max-width:560px}
+.sg-note a{border-bottom:1px solid var(--line-ink)}
+.sg-note a:hover{color:var(--bordeaux)}
+
+/* toast */
+.toast{
+  position:fixed;bottom:26px;left:50%;transform:translate(-50%,80px);
+  background:var(--ink);color:var(--ivory);padding:14px 26px;z-index:99;
+  font-size:12px;letter-spacing:.2em;text-transform:uppercase;
+  transition:transform .45s var(--ease);display:flex;gap:12px;align-items:center;
+}
+.toast.is-on{transform:translate(-50%,0)}
+.toast i{width:7px;height:7px;background:#CE9AA3;border-radius:50%;font-style:normal}
+
+/* ---------- responsive ---------- */
+@media (max-width:1080px){
+  .grid{grid-template-columns:repeat(3,1fr)}
+  .hero{grid-template-columns:1fr}
+  .hero-media{min-height:52vh;order:-1}
+  .hero-panel{padding-top:56px;padding-bottom:80px}
+  .story{grid-template-columns:1fr}
+}
+@media (max-width:860px){
+  .main-nav{display:none}
+  .burger{display:flex}
+  .head-row{grid-template-columns:auto 1fr auto}
+  .brand{justify-self:center}
+  .icon-btn .icon-txt{display:none}
+  .reviews-grid{grid-template-columns:1fr}
+  .service-grid{grid-template-columns:1fr}
+  .svc{border-left:none;border-top:1px solid var(--line)}
+  .svc:first-child{border-top:none}
+  .foot-grid{grid-template-columns:1fr}
+  .qv{grid-template-columns:1fr}
+  .qv-media .frame{max-width:260px}
+}
+@media (max-width:640px){
+  .grid{grid-template-columns:repeat(2,1fr);gap:26px 12px}
+  .qadd{display:none}
+  .mob-qadd-toggle{
+    display:flex;position:absolute;bottom:10px;right:10px;z-index:3;
+    width:36px;height:36px;border-radius:50%;background:var(--ink);color:var(--ivory);
+    align-items:center;justify-content:center;font-size:18px;line-height:1;
+  }
+  .card-eye{opacity:1;transform:none;width:34px;height:34px}
+  .sec-head{flex-direction:column;align-items:flex-start;gap:10px}
+  .hero-foot{display:none}
+  .edit-tiles{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════ ANNOUNCEMENT ══════════════ -->
+<div class="announce" aria-live="polite">
+  <span class="is-on">Standard Delivery 1–5 Working Days · <em>Next Day Delivery Available</em></span>
+  <span>Full refund or free exchange if the item is unsuitable</span>
+  <span><em>Summer Sale</em> — now on</span>
+</div>
+
+<!-- ══════════════ HEADER ══════════════ -->
+<header class="site-head" id="siteHead">
+  <div class="head-row">
+    <div class="head-left">
+      <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
+        <i></i><i></i><i></i>
+      </button>
+    </div>
+    <a class="brand" href="https://jadedrose.co.uk/" target="_blank" rel="noopener" aria-label="Jaded Rose home">
+      <img src="https://jadedrose.co.uk/cdn/shop/files/Untitled-2_500x.png?v=1751544281" alt="Jaded Rose London">
+    </a>
+    <div class="head-right">
+      <button class="icon-btn" id="searchBtn" aria-label="Search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <span class="icon-txt">Search</span>
+      </button>
+      <a class="icon-btn" href="https://jadedrose.co.uk/account" target="_blank" rel="noopener" aria-label="Account">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
+        <span class="icon-txt">Account</span>
+      </a>
+      <button class="icon-btn" id="bagBtn" aria-label="Open bag">
+        <svg viewBox="0 0 24 24"><path d="M6 8h12l1 13H5L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="icon-txt">Bag</span>
+        <span class="bag-count" id="bagCount">0</span>
+      </button>
+    </div>
+  </div>
+
+  <nav aria-label="Main">
+    <ul class="main-nav">
+      <li class="nav-sale"><a href="https://jadedrose.co.uk/collections/sale" target="_blank" rel="noopener">Sale</a></li>
+      <li><a href="https://jadedrose.co.uk/collections/new-in" target="_blank" rel="noopener">New In</a></li>
+      <li>
+        <a href="https://jadedrose.co.uk/collections/clothing" target="_blank" rel="noopener">Shop</a>
+        <div class="dropdown">
+          <a href="https://jadedrose.co.uk/collections/all-dresses" target="_blank" rel="noopener">All Dresses</a>
+          <a href="https://jadedrose.co.uk/collections/mini-dresses" target="_blank" rel="noopener">Mini Dresses</a>
+          <a href="https://jadedrose.co.uk/collections/midi-dresses" target="_blank" rel="noopener">Midi Dresses</a>
+          <a href="https://jadedrose.co.uk/collections/midaxi-dresses" target="_blank" rel="noopener">Midaxi Dresses</a>
+          <a href="https://jadedrose.co.uk/collections/maxi-dresses" target="_blank" rel="noopener">Maxi Dresses</a>
+          <a href="https://jadedrose.co.uk/collections/jumpsuits" target="_blank" rel="noopener">Jumpsuits</a>
+          <a href="https://jadedrose.co.uk/collections/skirts" target="_blank" rel="noopener">Skirts</a>
+          <a href="https://jadedrose.co.uk/collections/bottoms" target="_blank" rel="noopener">Bottoms</a>
+          <a href="https://jadedrose.co.uk/collections/co-ords" target="_blank" rel="noopener">Co-ords</a>
+          <a href="https://jadedrose.co.uk/collections/tops" target="_blank" rel="noopener">Tops</a>
+        </div>
+      </li>
+      <li>
+        <a href="#occasions">By Style</a>
+        <div class="dropdown">
+          <a href="https://jadedrose.co.uk/collections/cotton-styles" target="_blank" rel="noopener">Cotton Styles</a>
+          <a href="https://jadedrose.co.uk/collections/corset-styles" target="_blank" rel="noopener">Corset Styles</a>
+          <a href="https://jadedrose.co.uk/collections/sequin-styles" target="_blank" rel="noopener">Sequin Styles</a>
+          <a href="https://jadedrose.co.uk/collections/modest-styles" target="_blank" rel="noopener">Modest Styles</a>
+        </div>
+      </li>
+      <li>
+        <a href="#occasions">By Occasion</a>
+        <div class="dropdown">
+          <a href="https://jadedrose.co.uk/collections/off-to-the-races" target="_blank" rel="noopener">Off To The Races</a>
+          <a href="https://jadedrose.co.uk/collections/the-graduate" target="_blank" rel="noopener">The Graduate</a>
+          <a href="https://jadedrose.co.uk/collections/holiday-ready" target="_blank" rel="noopener">Holiday Ready</a>
+          <a href="https://jadedrose.co.uk/collections/bride-to-be" target="_blank" rel="noopener">Bride-To-Be</a>
+          <a href="https://jadedrose.co.uk/collections/birthday-girl" target="_blank" rel="noopener">Birthday Girl</a>
+        </div>
+      </li>
+      <li>
+        <a href="#edits">Collections</a>
+        <div class="dropdown">
+          <a href="https://jadedrose.co.uk/collections/the-romance-edit" target="_blank" rel="noopener">The Romance Edit</a>
+          <a href="https://jadedrose.co.uk/collections/the-eden-edit" target="_blank" rel="noopener">The Eden Edit</a>
+          <a href="https://jadedrose.co.uk/collections/off-to-the-races" target="_blank" rel="noopener">Off To The Races</a>
+        </div>
+      </li>
+      <li>
+        <a href="https://jadedrose.co.uk/pages/contact-us" target="_blank" rel="noopener">About</a>
+        <div class="dropdown">
+          <a href="https://jadedrose.co.uk/pages/the-brand" target="_blank" rel="noopener">The Brand</a>
+          <a href="https://jadedrose.co.uk/pages/sustainability" target="_blank" rel="noopener">Sustainability</a>
+          <a href="https://jadedrose.co.uk/pages/shop-wholesale" target="_blank" rel="noopener">Wholesale</a>
+          <a href="https://jadedrose.co.uk/blogs/jaded-blogs" target="_blank" rel="noopener">Blog</a>
+          <a href="https://jadedrose.co.uk/pages/contact-us" target="_blank" rel="noopener">Contact Us</a>
+        </div>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ══════════════ MOBILE NAV ══════════════ -->
+<nav class="mob-nav" id="mobNav" aria-label="Mobile">
+  <div class="mob-nav-top">
+    <img src="https://jadedrose.co.uk/cdn/shop/files/Untitled-2-white_500x.png?v=1751544390" alt="Jaded Rose London">
+    <button class="mob-close" id="mobClose" aria-label="Close menu">&times;</button>
+  </div>
+  <div class="mob-group mob-sale"><a href="https://jadedrose.co.uk/collections/sale" target="_blank" rel="noopener">Sale</a></div>
+  <div class="mob-group"><a href="https://jadedrose.co.uk/collections/new-in" target="_blank" rel="noopener">New In</a></div>
+  <div class="mob-group">
+    <button type="button">Shop</button>
+    <div class="mob-sub">
+      <a href="https://jadedrose.co.uk/collections/all-dresses" target="_blank" rel="noopener">All Dresses</a>
+      <a href="https://jadedrose.co.uk/collections/mini-dresses" target="_blank" rel="noopener">Mini Dresses</a>
+      <a href="https://jadedrose.co.uk/collections/midi-dresses" target="_blank" rel="noopener">Midi Dresses</a>
+      <a href="https://jadedrose.co.uk/collections/maxi-dresses" target="_blank" rel="noopener">Maxi Dresses</a>
+      <a href="https://jadedrose.co.uk/collections/jumpsuits" target="_blank" rel="noopener">Jumpsuits</a>
+      <a href="https://jadedrose.co.uk/collections/skirts" target="_blank" rel="noopener">Skirts</a>
+      <a href="https://jadedrose.co.uk/collections/co-ords" target="_blank" rel="noopener">Co-ords</a>
+      <a href="https://jadedrose.co.uk/collections/tops" target="_blank" rel="noopener">Tops</a>
+    </div>
+  </div>
+  <div class="mob-group">
+    <button type="button">By Style</button>
+    <div class="mob-sub">
+      <a href="https://jadedrose.co.uk/collections/cotton-styles" target="_blank" rel="noopener">Cotton Styles</a>
+      <a href="https://jadedrose.co.uk/collections/corset-styles" target="_blank" rel="noopener">Corset Styles</a>
+      <a href="https://jadedrose.co.uk/collections/sequin-styles" target="_blank" rel="noopener">Sequin Styles</a>
+      <a href="https://jadedrose.co.uk/collections/modest-styles" target="_blank" rel="noopener">Modest Styles</a>
+    </div>
+  </div>
+  <div class="mob-group">
+    <button type="button">By Occasion</button>
+    <div class="mob-sub">
+      <a href="https://jadedrose.co.uk/collections/off-to-the-races" target="_blank" rel="noopener">Off To The Races</a>
+      <a href="https://jadedrose.co.uk/collections/the-graduate" target="_blank" rel="noopener">The Graduate</a>
+      <a href="https://jadedrose.co.uk/collections/holiday-ready" target="_blank" rel="noopener">Holiday Ready</a>
+      <a href="https://jadedrose.co.uk/collections/bride-to-be" target="_blank" rel="noopener">Bride-To-Be</a>
+      <a href="https://jadedrose.co.uk/collections/birthday-girl" target="_blank" rel="noopener">Birthday Girl</a>
+    </div>
+  </div>
+  <div class="mob-group">
+    <button type="button">About</button>
+    <div class="mob-sub">
+      <a href="https://jadedrose.co.uk/pages/the-brand" target="_blank" rel="noopener">The Brand</a>
+      <a href="https://jadedrose.co.uk/pages/sustainability" target="_blank" rel="noopener">Sustainability</a>
+      <a href="https://jadedrose.co.uk/pages/shop-wholesale" target="_blank" rel="noopener">Wholesale</a>
+      <a href="https://jadedrose.co.uk/blogs/jaded-blogs" target="_blank" rel="noopener">Blog</a>
+      <a href="https://jadedrose.co.uk/pages/contact-us" target="_blank" rel="noopener">Contact Us</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════ HERO ══════════════ -->
+<section class="hero" style="padding:0">
+  <div class="hero-panel">
+    <p class="eyebrow">Jaded Rose · London</p>
+    <h1 class="hero-title display">
+      <span class="line"><span>Timeless</span></span>
+      <span class="line"><span>design, for</span></span>
+      <span class="line"><span>the girl who</span></span>
+      <span class="line"><span>wants it all</span></span>
+    </h1>
+    <p class="hero-sub">Sultry, structured occasionwear — corseted cottons and floor-sweeping gowns, cut in London for every moment worth dressing for.</p>
+    <div class="hero-ctas">
+      <a class="btn btn--ghost-light" href="https://jadedrose.co.uk/collections/new-in" target="_blank" rel="noopener">Explore Jaded Rose</a>
+      <a class="btn btn--bordeaux" href="https://jadedrose.co.uk/collections/sale" target="_blank" rel="noopener">Shop Summer Sale</a>
+    </div>
+    <div class="hero-foot">
+      <span>Occasion &amp; party wear</span>
+      <span>Dresses · Jumpsuits · Skirts</span>
+    </div>
+  </div>
+  <div class="hero-media">
+    <img src="https://jadedrose.co.uk/cdn/shop/files/EDITH-BURGUNDY-4-jpg_1200x1200.jpg?v=1761567143" alt="Edith Burgundy Bandeau Corset Gown Maxi Dress" fetchpriority="high">
+    <a class="hero-chip" href="https://jadedrose.co.uk/collections/new-in" target="_blank" rel="noopener"><b>Chocolate</b> New In →</a>
+  </div>
+</section>
+
+<!-- ══════════════ OCCASIONS (signature arches) ══════════════ -->
+<section class="occasions" id="occasions">
+  <div class="sec-head reveal">
+    <div>
+      <p class="eyebrow">Shop by occasion</p>
+      <h2 class="sec-title display">Dressed for the moment</h2>
+    </div>
+    <a class="sec-link" href="https://jadedrose.co.uk/collections/clothing" target="_blank" rel="noopener">Shop everything</a>
+  </div>
+  <div class="rail reveal">
+    <a class="occ" href="https://jadedrose.co.uk/collections/off-to-the-races" target="_blank" rel="noopener">
+      <div class="occ-frame"><img loading="lazy" src="https://jadedrose.co.uk/cdn/shop/files/JADE-GREEN-1-jpg_1200x1200.jpg?v=1761567379" alt="Off To The Races"></div>
+      <span class="occ-name">Off To The Races</span>
+    </a>
+    <a class="occ" href="https://jadedrose.co.uk/collections/the-graduate" target="_blank" rel="noopener">
+      <div class="occ-frame"><img loading="lazy" src="https://jadedrose.co.uk/cdn/shop/files/CERRA-NAVY-1-jpg_1200x1200.jpg?v=1761826020" alt="The Graduate"></div>
+      <span class="occ-name">The Graduate</span>
+    </a>
+    <a class="occ" href="https://jadedrose.co.uk/collections/holiday-ready" target="_blank" rel="noopener">
+      <div class="occ-frame"><img loading="lazy" src="https://jadedrose.co.uk/cdn/shop/files/KIMBER-LILAV-1_1200x1200.jpg?v=1751014229" alt="Holiday Ready"></div>
+      <span class="occ-name">Holiday Ready</span>
+    </a>
+    <a class="occ" href="https://jadedrose.co.uk/collections/bride-to-be" target="_blank" rel="noopener">
+      <div class="occ-frame"><img loading="lazy" src="https://jadedrose.co.uk/cdn/shop/files/ZAIN-WHITE-1_1200x1200.jpg?v=1774611672" alt="Bride-To-Be"></div>
+      <span class="occ-name">Bride-To-Be</span>
+    </a>
+    <a class="occ" href="https://jadedrose.co.uk/collections/birthday-girl" target="_blank" rel="noopener">
+      <div class="occ-frame"><img loading="lazy" src="https://jadedrose.co.uk/cdn/shop/files/NILA-NEW-3_1200x1200.jpg?v=1785144140" alt="Birthday Girl"></div>
+      <span class="occ-name">Birthday Girl</span>
+    </a>
+  </div>
+</section>
+
+<!-- ══════════════ YOUR FAVOURITES ══════════════ -->
+<section class="faves" id="favourites">
+  <div class="sec-head reveal">
+    <div>
+      <p class="eyebrow">Best sellers</p>
+      <h2 class="sec-title display">Your Favourites</h2>
+    </div>
+    <a class="sec-link" href="https://jadedrose.co.uk/collections/best-sellers" target="_blank" rel="noopener">View all</a>
+  </div>
+  <div class="tabs reveal" role="tablist" aria-label="Filter favourites">
+    <button class="tab is-on" data-filter="all" role="tab" aria-selected="true">All</button>
+    <button class="tab" data-filter="midi" role="tab" aria-selected="false">Midi</button>
+    <button class="tab" data-filter="maxi" role="tab" aria-selected="false">Maxi Gowns</button>
+    <button class="tab" data-filter="mini" role="tab" aria-selected="false">Mini</button>
+    <button class="tab" data-filter="separates" role="tab" aria-selected="false">Skirts &amp; Bottoms</button>
+    <button class="tab" data-filter="sale" role="tab" aria-selected="false">Sale</button>
+  </div>
+  <div class="grid reveal" id="productGrid"></div>
+</section>
+
+<!-- ══════════════ STORY + EDITS ══════════════ -->
+<section class="story" id="edits">
+  <div>
+    <p class="eyebrow">Our Story</p>
+    <h2 class="story-quote display">Born out of the love for high quality, and specially curated looks.</h2>
+    <p class="body">Jaded Rose brings you sultry and authentic pieces that leave you wanting more.</p>
+    <a class="btn btn--ghost-light" href="https://jadedrose.co.uk/pages/the-brand" target="_blank" rel="noopener">The Brand</a>
+  </div>
+  <div class="edit-tiles">
+    <a class="edit-tile" href="https://jadedrose.co.uk/collections/the-romance-edit" target="_blank" rel="noopener">
+      <img loading="lazy" src="https://jadedrose.co.uk/cdn/shop/files/DALINA-IVORY-1_1200x1200.jpg?v=1753094985" alt="The Romance Edit">
+      <figcaption>The Romance Edit</figcaption>
+    </a>
+    <a class="edit-tile" href="https://jadedrose.co.uk/collections/the-eden-edit" target="_blank" rel="noopener">
+      <img loading="lazy" src="https://jadedrose.co.uk/cdn/shop/files/DAISY-SKIRT-1-jpg_1200x1200.jpg?v=1761830225" alt="The Eden Edit">
+      <figcaption>The Eden Edit</figcaption>
+    </a>
+  </div>
+</section>
+
+<!-- ══════════════ REVIEWS ══════════════ -->
+<section>
+  <div class="sec-head reveal">
+    <div>
+      <p class="eyebrow">From the Jaded girls</p>
+      <h2 class="sec-title display">Worn &amp; loved</h2>
+    </div>
+  </div>
+  <div class="reviews-grid reveal">
+    <figure class="review">
+      <span class="review-stars" aria-label="5 out of 5 stars">★★★★★</span>
+      <q>Lovely dress, fits perfectly. Looks exactly like in the picture. Delivery was quick.</q>
+      <figcaption class="review-by">Kerry — Jade Black Corset Midi</figcaption>
+    </figure>
+    <figure class="review">
+      <span class="review-stars" aria-label="5 out of 5 stars">★★★★★</span>
+      <q>Loved this dress — I actually ordered it as a back up but ended up wearing it. Got so many compliments all day.</q>
+      <figcaption class="review-by">Hannah — Cerra Navy Gown</figcaption>
+    </figure>
+    <figure class="review">
+      <span class="review-stars" aria-label="5 out of 5 stars">★★★★★</span>
+      <q>Great fit — the bodice complements and slims. Loved the pockets in the skirt too. Great for lots of occasions.</q>
+      <figcaption class="review-by">Verified buyer — Jade Olive Midi</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ══════════════ SERVICE ══════════════ -->
+<section class="service">
+  <div class="service-grid">
+    <div class="svc reveal">
+      <h3>Delivery</h3>
+      <p>Standard delivery is 1–5 working days. Next day delivery available. <a href="https://jadedrose.co.uk/pages/shipping" target="_blank" rel="noopener">Shipping costs</a></p>
+    </div>
+    <div class="svc reveal">
+      <h3>Returns</h3>
+      <p>Shop with confidence — full refund or free exchange if the item is unsuitable. <a href="https://jadedrose.co.uk/policies/refund-policy" target="_blank" rel="noopener">Refund policy</a></p>
+    </div>
+    <div class="svc reveal">
+      <h3>Fit</h3>
+      <p>UK sizes 6–18, measured in inches and centimetres. <a href="#" data-open-sizeguide>Open the size guide</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer class="foot">
+  <div class="foot-grid">
+    <div class="foot-news">
+      <img class="foot-logo" src="https://jadedrose.co.uk/cdn/shop/files/Untitled-2-white_500x.png?v=1751544390" alt="Jaded Rose London">
+      <h4>Sign up for all things Jaded Rose</h4>
+      <p>New drops, restocks and sale access — straight to your inbox.</p>
+      <form class="news-form" id="newsForm">
+        <input type="email" placeholder="Email address" aria-label="Email address" required>
+        <button type="submit">Join →</button>
+      </form>
+      <p class="news-ok" id="newsOk">You're on the list.</p>
+    </div>
+    <div>
+      <h4>Customer Care</h4>
+      <ul class="foot-list">
+        <li><a href="https://jadedrose.co.uk/search" target="_blank" rel="noopener">Search</a></li>
+        <li><a href="https://jadedrose.co.uk/pages/contact-us" target="_blank" rel="noopener">Contact Us</a></li>
+        <li><a href="https://jadedrose.co.uk/pages/shipping" target="_blank" rel="noopener">Shipping</a></li>
+        <li><a href="https://jadedrose.co.uk/policies/terms-of-service" target="_blank" rel="noopener">Terms of Service</a></li>
+        <li><a href="https://jadedrose.co.uk/policies/refund-policy" target="_blank" rel="noopener">Returns Policy</a></li>
+        <li><a href="https://jadedrose.co.uk/pages/size-guide" target="_blank" rel="noopener">Size Guide</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Follow</h4>
+      <ul class="foot-list">
+        <li><a href="https://instagram.com/jadedroselondon" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://tiktok.com/@jadedroselondon" target="_blank" rel="noopener">TikTok</a></li>
+        <li><a href="https://twitter.com/jadedroselondon" target="_blank" rel="noopener">Twitter</a></li>
+        <li><a href="https://facebook.com/jadedroselondon" target="_blank" rel="noopener">Facebook</a></li>
+      </ul>
+      <h4 style="margin-top:28px">Currency</h4>
+      <select class="currency-sel" aria-label="Currency">
+        <option>United Kingdom (GBP £)</option>
+        <option>United States (USD $)</option>
+        <option>Europe (EUR €)</option>
+        <option>Australia (AUD $)</option>
+        <option>Canada (CAD $)</option>
+        <option>United Arab Emirates (AED د.إ)</option>
+      </select>
+    </div>
+  </div>
+  <div class="foot-base">
+    <span>© 2026 Jadedroselondon · Powered by Shopify</span>
+    <div class="pay-row">
+      <span class="pay">Visa</span><span class="pay">Mastercard</span><span class="pay">Amex</span>
+      <span class="pay">PayPal</span><span class="pay">Apple Pay</span><span class="pay">Google Pay</span>
+      <span class="pay">Shop Pay</span><span class="pay">+ more</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════ OVERLAYS ══════════════ -->
+<div class="scrim" id="scrim"></div>
+
+<aside class="drawer" id="cartDrawer" aria-label="Shopping bag" role="dialog" aria-modal="true">
+  <div class="drawer-head">
+    <h3>Your Bag</h3>
+    <button class="x-btn" data-close aria-label="Close bag">&times;</button>
+  </div>
+  <div class="cart-body" id="cartBody"></div>
+  <div class="cart-foot">
+    <div class="cart-sub"><span>Subtotal</span><b id="cartTotal">£0.00</b></div>
+    <p class="cart-note">Standard delivery 1–5 working days · Next day available. Shipping calculated at checkout.</p>
+    <button class="btn btn--solid" id="checkoutBtn">Checkout</button>
+  </div>
+</aside>
+
+<div class="search-ov" id="searchOv" role="dialog" aria-modal="true" aria-label="Search">
+  <div class="search-row">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+    <input id="searchInput" type="search" placeholder="Search dresses, gowns, skirts…" autocomplete="off">
+    <button class="x-btn" data-close aria-label="Close search">&times;</button>
+  </div>
+  <p class="search-hint" id="searchHint">Try “corset”, “maxi” or “sequin”</p>
+  <div class="search-results" id="searchResults"></div>
+</div>
+
+<div class="modal" id="qvModal" role="dialog" aria-modal="true" aria-label="Quick view">
+  <div class="modal-box">
+    <button class="x-btn modal-x" data-close aria-label="Close quick view">&times;</button>
+    <div class="qv" id="qvBody"></div>
+  </div>
+</div>
+
+<div class="modal" id="sgModal" role="dialog" aria-modal="true" aria-label="Size guide">
+  <div class="modal-box sg-box">
+    <button class="x-btn modal-x" data-close aria-label="Close size guide">&times;</button>
+    <h3 class="display">Size Guide</h3>
+    <table class="sg-table">
+      <thead>
+        <tr><th></th><th>Bust</th><th>Waist</th><th>Hips</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>UK 6 · XXS</td><td>29 in · 73 cm</td><td>24 in · 61 cm</td><td>32 in · 81 cm</td></tr>
+        <tr><td>UK 8 · XS</td><td>31 in · 78 cm</td><td>25 in · 63 cm</td><td>34 in · 86 cm</td></tr>
+        <tr><td>UK 10 · S</td><td>33 in · 83 cm</td><td>27 in · 66 cm</td><td>36 in · 91 cm</td></tr>
+        <tr><td>UK 12 · M</td><td>35 in · 88 cm</td><td>27 in · 69 cm</td><td>38 in · 96 cm</td></tr>
+        <tr><td>UK 14 · L</td><td>37 in · 93 cm</td><td>29 in · 74 cm</td><td>40 in · 101 cm</td></tr>
+        <tr><td>UK 16 · XL</td><td>39 in · 98 cm</td><td>31 in · 79 cm</td><td>42 in · 106 cm</td></tr>
+        <tr><td>UK 18 · 2XL</td><td>41 in · 103 cm</td><td>33 in · 85 cm</td><td>44 in · 111 cm</td></tr>
+      </tbody>
+    </table>
+    <p class="sg-note">Please note the sizing information provided is a general guideline and can vary slightly depending on each individual garment. For more information, talk to our customer care team — <a href="https://jadedrose.co.uk/pages/contact-us" target="_blank" rel="noopener">Contact Us</a>.</p>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status"><i></i><span id="toastMsg">Added to bag</span></div>
+
+<script>
+/* ============================================================
+   Catalogue — live data & images from jadedrose.co.uk (Shopify CDN)
+   ============================================================ */
+const CDN = "https://jadedrose.co.uk/cdn/shop/files/";
+const SITE = "https://jadedrose.co.uk/products/";
+
+const PRODUCTS = [
+  {id:"jade-white", name:"Jade White Cotton Bustier Corset Midi Dress", price:75,
+   img:CDN+"26_1200x1200.jpg?v=1785338455", url:SITE+"jade-vanilla-corset-midi-dress",
+   cats:["midi"], rating:3.6, reviews:5, badge:null,
+   desc:"A timeless statement in soft white — sculpted bustier bodice with underwired cups, hidden pockets and a gathered midi skirt. 98% cotton."},
+  {id:"edith-navy", name:"Edith Bandeau Corset Maxi Dress in Navy Blue", price:79,
+   img:CDN+"REETA-NAVY-1_1200x1200.jpg?v=1751277205", url:SITE+"edith-bandeau-corset-maxi-dress-in-navy-blue",
+   cats:["maxi"], rating:4.0, reviews:12, badge:null,
+   desc:"A sculpted corset bodice with a folded bandeau neckline and a sweeping full skirt — made for weddings, black-tie and race days."},
+  {id:"edith-burgundy", name:"Edith Burgundy Bandeau Corset Gown Maxi Dress", price:79,
+   img:CDN+"EDITH-BURGUNDY-4-jpg_1200x1200.jpg?v=1761567143", url:SITE+"edith-bandeau-gown-maxi-dress-in-burgundy",
+   cats:["maxi"], rating:1.8, reviews:5, badge:null,
+   desc:"The Edith reimagined in deep burgundy — cinching corset bodice, floor-sweeping layered skirt and hidden side pockets."},
+  {id:"jade-black", name:"Jade Black Cotton Bustier Corset Midi Dress", price:75,
+   img:CDN+"CORINTHIA-BLACK-2_1200x1200.jpg?v=1751277378", url:SITE+"jade-black-cotton-corset-midi-dress",
+   cats:["midi"], rating:5.0, reviews:3, badge:null,
+   desc:"Comfort with contour — rich black cotton, structured bust with internal shaping, and functional hidden pockets."},
+  {id:"cerra-navy", name:"Cerra Navy Sweetheart Gown Maxi Dress", price:85,
+   img:CDN+"CERRA-NAVY-1-jpg_1200x1200.jpg?v=1761826020", url:SITE+"cerra-navy-sweetheart-gown-maxi-dress",
+   cats:["maxi"], rating:3.4, reviews:7, badge:null,
+   desc:"Sweetheart cami neckline, panelled bodice and a full gathered skirt in deep navy cotton — for graduations and formal evenings."},
+  {id:"jade-olive", name:"Jade Olive Corset Midi Dress", price:75,
+   img:CDN+"JADE-GREEN-1-jpg_1200x1200.jpg?v=1761567379", url:SITE+"jade-olive-corset-midi-dress",
+   cats:["midi"], rating:3.2, reviews:6, badge:null,
+   desc:"Rich olive green with a corset-inspired bodice, internal boning, adjustable straps and hidden pockets."},
+  {id:"jade-babyblue", name:"Jade Baby Blue Cotton Corset Midi Dress", price:75,
+   img:CDN+"JADE-BBLUE-1_1200x1200.jpg?v=1778773693", url:SITE+"jade-baby-blue-cotton-corset-midi-dress",
+   cats:["midi"], rating:null, reviews:0, badge:"new",
+   desc:"A soft icy hue with a sculpted bodice, underwired cups and barely-there adjustable straps. Gathered midi skirt with pockets."},
+  {id:"daisy-skirt", name:"Daisy White Box Pleat Cotton Maxi Skater Skirt", price:50,
+   img:CDN+"DAISY-SKIRT-1-jpg_1200x1200.jpg?v=1761830225", url:SITE+"daisy-white-box-pleat-cotton-maxi-skirt",
+   cats:["separates"], rating:5.0, reviews:3, badge:null,
+   desc:"Gathered box pleats in soft breathable cotton with a smocked waistband and hidden pockets. Pairs with the Reeta corset top."},
+  {id:"zain-white", name:"Zain White Cotton Pleated Bow Halter Midi Dress", price:75,
+   img:CDN+"ZAIN-WHITE-1_1200x1200.jpg?v=1774611672", url:SITE+"zain-white-cotton-box-pleat-square-halter-midi-dress",
+   cats:["midi"], rating:1.0, reviews:1, badge:null,
+   desc:"Crisp white cotton with a square neckline, halter tie bow and full box-pleated skirt — made for bridal events and summer weddings."},
+  {id:"kimber-lilac", name:"Kimber Tunic T-shirt Dress in Lilac Sequin", price:26, was:45,
+   img:CDN+"KIMBER-LILAV-1_1200x1200.jpg?v=1751014229", url:SITE+"tunic-t-shirt-dress-in-lilac-sequin",
+   cats:["mini","sale"], rating:5.0, reviews:1, badge:"sale",
+   desc:"Light-catching lilac sequins over a soft interior lining — a relaxed-fit tunic mini for glam nights out."},
+  {id:"nila-pants", name:"Nila Black Tassle Sequin Mesh Pants", price:42, was:45,
+   img:CDN+"NILA-NEW-3_1200x1200.jpg?v=1785144140", url:SITE+"nila-pants-in-sheer-fabric-with-sequin-details-in-black",
+   cats:["separates","sale"], rating:5.0, reviews:2, badge:"sale",
+   desc:"Sheer mesh embellished with tassel sequins — a high-waist, straight-leg statement for nights out and festivals."},
+  {id:"dalina-ivory", name:"Dalina — Off the Shoulder Corset Mini Dress in Ivory Satin", price:50, was:60,
+   img:CDN+"DALINA-IVORY-1_1200x1200.jpg?v=1753094985", url:SITE+"dalina-off-the-shoulder-corset-mini-dress-in-ivory-satin",
+   cats:["mini","sale"], rating:3.0, reviews:2, badge:"sale",
+   desc:"Lustrous duchess satin with exclusive corsetry boning and sultry off-shoulder draped straps — for date nights and events."},
+];
+const SIZES = [6,8,10,12,14,16];
+const gbp = n => "£" + n.toFixed(2);
+
+/* ============================================================
+   Product grid + filters + quick add
+   ============================================================ */
+const grid = document.getElementById("productGrid");
+
+function starRow(p){
+  if(!p.reviews) return '<span class="stars"><span>Be the first to review</span></span>';
+  const full = Math.round(p.rating);
+  const s = "★".repeat(full) + "☆".repeat(5-full);
+  return `<span class="stars"><b>${s}</b> <span>${p.rating.toFixed(1)} · ${p.reviews} review${p.reviews>1?"s":""}</span></span>`;
+}
+function badgeFor(p){
+  if(p.badge==="sale" && p.was){
+    const pct = Math.round((1 - p.price/p.was)*100);
+    return `<span class="badge">Sale −${pct}%</span>`;
+  }
+  if(p.badge==="new") return `<span class="badge badge--new">New In</span>`;
+  return "";
+}
+function priceRow(p){
+  return p.was
+    ? `<span class="price price--sale">${gbp(p.price)}</span><span class="price-was">${gbp(p.was)}</span>`
+    : `<span class="price">${gbp(p.price)}</span>`;
+}
+
+function renderGrid(filter){
+  const list = filter==="all" ? PRODUCTS : PRODUCTS.filter(p=>p.cats.includes(filter));
+  grid.innerHTML = list.map(p=>`
+    <article class="card" data-id="${p.id}">
+      <div class="card-media">
+        ${badgeFor(p)}
+        <button class="card-eye" data-qv="${p.id}" aria-label="Quick view ${p.name}">
+          <svg viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+        </button>
+        <a href="${p.url}" target="_blank" rel="noopener" aria-label="${p.name}">
+          <img loading="lazy" src="${p.img}" alt="${p.name}">
+        </a>
+        <button class="mob-qadd-toggle" data-mobqadd aria-label="Quick add">+</button>
+        <div class="qadd">
+          <p class="qadd-label">Quick add — select size</p>
+          <div class="qadd-sizes">
+            ${SIZES.map(s=>`<button data-add="${p.id}" data-size="${s}">${s}</button>`).join("")}
+          </div>
+        </div>
+      </div>
+      <div class="card-info">
+        <h3 class="card-name"><a href="${p.url}" target="_blank" rel="noopener">${p.name}</a></h3>
+        <div class="card-meta">${priceRow(p)}</div>
+        ${starRow(p)}
+      </div>
+    </article>`).join("");
+}
+renderGrid("all");
+
+document.querySelectorAll(".tab").forEach(t=>{
+  t.addEventListener("click", ()=>{
+    document.querySelectorAll(".tab").forEach(x=>{x.classList.remove("is-on");x.setAttribute("aria-selected","false")});
+    t.classList.add("is-on"); t.setAttribute("aria-selected","true");
+    renderGrid(t.dataset.filter);
+    observeReveals();
+  });
+});
+
+grid.addEventListener("click", e=>{
+  const add = e.target.closest("[data-add]");
+  if(add){ addToBag(add.dataset.add, add.dataset.size); return; }
+  const eye = e.target.closest("[data-qv]");
+  if(eye){ openQuickView(eye.dataset.qv); return; }
+  const mob = e.target.closest("[data-mobqadd]");
+  if(mob){ mob.closest(".card").classList.toggle("qadd-open"); }
+});
+
+/* ============================================================
+   Bag (in-memory) + drawer
+   ============================================================ */
+let bag = [];
+const bagCount = document.getElementById("bagCount");
+const cartBody = document.getElementById("cartBody");
+const cartTotal = document.getElementById("cartTotal");
+
+function addToBag(id, size, qty=1){
+  const p = PRODUCTS.find(x=>x.id===id);
+  const line = bag.find(l=>l.id===id && l.size===size);
+  if(line) line.qty += qty; else bag.push({id, size, qty});
+  syncBag();
+  toast(`${p.name.split(" ").slice(0,3).join(" ")}… · UK ${size} added to bag`);
+  openLayer(cartDrawer);
+}
+function syncBag(){
+  const count = bag.reduce((a,l)=>a+l.qty,0);
+  bagCount.textContent = count;
+  bagCount.classList.toggle("is-on", count>0);
+  if(!bag.length){
+    cartBody.innerHTML = `<div class="cart-empty">
+      <p class="display">Your bag is empty</p>
+      <p>Beautiful things are waiting — start with Your Favourites.</p>
+    </div>`;
+  } else {
+    cartBody.innerHTML = bag.map((l,i)=>{
+      const p = PRODUCTS.find(x=>x.id===l.id);
+      return `<div class="cart-line">
+        <img src="${p.img}" alt="${p.name}">
+        <div>
+          <p class="cl-name">${p.name}</p>
+          <p class="cl-size">Size UK ${l.size}</p>
+          <span class="qty">
+            <button data-cline="${i}" data-d="-1" aria-label="Decrease quantity">−</button>
+            <b>${l.qty}</b>
+            <button data-cline="${i}" data-d="1" aria-label="Increase quantity">+</button>
+          </span>
+        </div>
+        <div class="cl-right">
+          <span class="cl-price">${gbp(p.price*l.qty)}</span>
+          <button class="cl-remove" data-crem="${i}">Remove</button>
+        </div>
+      </div>`;
+    }).join("");
+  }
+  const total = bag.reduce((a,l)=>{
+    const p = PRODUCTS.find(x=>x.id===l.id); return a + p.price*l.qty;
+  },0);
+  cartTotal.textContent = gbp(total);
+}
+cartBody.addEventListener("click", e=>{
+  const q = e.target.closest("[data-cline]");
+  if(q){
+    const l = bag[+q.dataset.cline];
+    l.qty += +q.dataset.d;
+    if(l.qty<1) bag.splice(+q.dataset.cline,1);
+    syncBag(); return;
+  }
+  const r = e.target.closest("[data-crem]");
+  if(r){ bag.splice(+r.dataset.crem,1); syncBag(); }
+});
+document.getElementById("checkoutBtn").addEventListener("click", ()=>{
+  toast("Demo build — checkout runs through Shopify on the live store");
+});
+syncBag();
+
+/* ============================================================
+   Quick view
+   ============================================================ */
+const qvModal = document.getElementById("qvModal");
+const qvBody = document.getElementById("qvBody");
+let qvSel = {id:null, size:null};
+
+function openQuickView(id){
+  const p = PRODUCTS.find(x=>x.id===id);
+  qvSel = {id, size:null};
+  qvBody.innerHTML = `
+    <div class="qv-media"><div class="frame"><img src="${p.img}" alt="${p.name}"></div></div>
+    <div class="qv-info">
+      <p class="eyebrow">Jaded Rose</p>
+      <h3>${p.name}</h3>
+      <div class="qv-price-row">${priceRow(p)}</div>
+      ${starRow(p)}
+      <p class="qv-desc" style="margin-top:14px">${p.desc}</p>
+      <p class="qv-label"><span>Select size — UK</span><button data-open-sizeguide>Size guide</button></p>
+      <div class="size-row" id="qvSizes">
+        ${SIZES.map(s=>`<button data-qvsize="${s}">${s}</button>`).join("")}
+      </div>
+      <div class="qv-actions">
+        <button class="btn btn--solid" id="qvAdd">Add to Bag</button>
+      </div>
+      <a class="qv-full" href="${p.url}" target="_blank" rel="noopener">View full details on jadedrose.co.uk →</a>
+      <div class="qv-service">
+        <span>Standard Delivery 1–5 Working Days · Next Day Available</span>
+        <span>Full refund or free exchange if the item is unsuitable</span>
+      </div>
+    </div>`;
+  openLayer(qvModal);
+}
+qvBody.addEventListener("click", e=>{
+  const s = e.target.closest("[data-qvsize]");
+  if(s){
+    qvSel.size = s.dataset.qvsize;
+    qvBody.querySelectorAll("[data-qvsize]").forEach(b=>b.classList.toggle("is-on", b===s));
+    return;
+  }
+  if(e.target.closest("#qvAdd")){
+    if(!qvSel.size){ toast("Select a size first"); return; }
+    closeLayers();
+    addToBag(qvSel.id, qvSel.size);
+  }
+});
+
+/* ============================================================
+   Search
+   ============================================================ */
+const searchOv = document.getElementById("searchOv");
+const searchInput = document.getElementById("searchInput");
+const searchResults = document.getElementById("searchResults");
+const searchHint = document.getElementById("searchHint");
+
+searchInput.addEventListener("input", ()=>{
+  const q = searchInput.value.trim().toLowerCase();
+  if(!q){ searchResults.innerHTML=""; searchHint.textContent="Try \u201Ccorset\u201D, \u201Cmaxi\u201D or \u201Csequin\u201D"; return; }
+  const hits = PRODUCTS.filter(p => (p.name+" "+p.desc+" "+p.cats.join(" ")).toLowerCase().includes(q));
+  searchHint.textContent = hits.length ? `${hits.length} piece${hits.length>1?"s":""} found` : "Nothing found — try another word";
+  searchResults.innerHTML = hits.map(p=>`
+    <button class="sr-card" data-srqv="${p.id}">
+      <img src="${p.img}" alt="">
+      <span><b>${p.name}</b><span>${gbp(p.price)}</span></span>
+    </button>`).join("");
+});
+searchResults.addEventListener("click", e=>{
+  const c = e.target.closest("[data-srqv]");
+  if(c){ closeLayers(); openQuickView(c.dataset.srqv); }
+});
+
+/* ============================================================
+   Layer management (scrim / drawers / modals / mobile nav)
+   ============================================================ */
+const scrim = document.getElementById("scrim");
+const cartDrawer = document.getElementById("cartDrawer");
+const mobNav = document.getElementById("mobNav");
+const sgModal = document.getElementById("sgModal");
+const layers = [cartDrawer, mobNav, searchOv, qvModal, sgModal];
+
+function openLayer(el){
+  layers.forEach(l=>l.classList.remove("is-open"));
+  el.classList.add("is-open");
+  scrim.classList.add("is-on");
+  document.body.classList.add("is-locked");
+  if(el===searchOv) setTimeout(()=>searchInput.focus(),350);
+}
+function closeLayers(){
+  layers.forEach(l=>l.classList.remove("is-open"));
+  scrim.classList.remove("is-on");
+  document.body.classList.remove("is-locked");
+  document.getElementById("burgerBtn").setAttribute("aria-expanded","false");
+}
+scrim.addEventListener("click", closeLayers);
+document.addEventListener("keydown", e=>{ if(e.key==="Escape") closeLayers(); });
+document.querySelectorAll("[data-close]").forEach(b=>b.addEventListener("click", closeLayers));
+document.addEventListener("click", e=>{
+  if(e.target.closest("[data-open-sizeguide]")){ e.preventDefault(); openLayer(sgModal); }
+});
+
+document.getElementById("bagBtn").addEventListener("click", ()=>openLayer(cartDrawer));
+document.getElementById("searchBtn").addEventListener("click", ()=>openLayer(searchOv));
+document.getElementById("burgerBtn").addEventListener("click", function(){
+  this.setAttribute("aria-expanded","true"); openLayer(mobNav);
+});
+document.getElementById("mobClose").addEventListener("click", closeLayers);
+document.querySelectorAll(".mob-group > button").forEach(b=>{
+  b.addEventListener("click", ()=>b.parentElement.classList.toggle("is-open"));
+});
+
+/* ============================================================
+   Toast · announcement rotation · sticky shadow · reveals
+   ============================================================ */
+const toastEl = document.getElementById("toast");
+let toastTimer;
+function toast(msg){
+  document.getElementById("toastMsg").textContent = msg;
+  toastEl.classList.add("is-on");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>toastEl.classList.remove("is-on"), 2600);
+}
+
+const annSpans = document.querySelectorAll(".announce span");
+let annI = 0;
+setInterval(()=>{
+  annSpans[annI].classList.remove("is-on");
+  annI = (annI+1) % annSpans.length;
+  annSpans[annI].classList.add("is-on");
+}, 4200);
+
+const head = document.getElementById("siteHead");
+window.addEventListener("scroll", ()=>head.classList.toggle("is-scrolled", window.scrollY>10), {passive:true});
+
+let io;
+function observeReveals(){
+  if(io) io.disconnect();
+  io = new IntersectionObserver(es=>{
+    es.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add("is-in"); io.unobserve(en.target);} });
+  }, {threshold:.12});
+  document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+}
+observeReveals();
+
+document.getElementById("newsForm").addEventListener("submit", e=>{
+  e.preventDefault();
+  document.getElementById("newsOk").style.display="block";
+  e.target.querySelector("input").value="";
+});
+</script>
+</body>
+</html>
