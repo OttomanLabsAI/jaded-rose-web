@@ -348,6 +348,20 @@ section{padding:clamp(64px,8vw,120px) var(--pad)}
 .stars span{color:var(--muted);letter-spacing:.02em}
 .mob-qadd-toggle{display:none}
 
+/* colour swatches */
+.swatch-row{display:flex;align-items:center;gap:8px;margin-top:3px}
+.swatch{
+  width:16px;height:16px;border-radius:50%;padding:0;flex:none;
+  background:var(--sw);border:1px solid var(--line-ink);
+  box-shadow:inset 0 0 0 1px rgba(253,251,246,.35);
+  transition:transform .25s var(--ease), box-shadow .25s var(--ease);
+}
+.swatch:hover{transform:scale(1.18)}
+.swatch.is-on{box-shadow:0 0 0 2px var(--chalk), 0 0 0 3px var(--ink)}
+.swatch-label{font-size:11.5px;letter-spacing:.06em;color:var(--muted)}
+.swatch-row--qv{margin-bottom:26px}
+.swatch-row--qv .swatch{width:22px;height:22px}
+
 /* ---------- story band ---------- */
 .story{
   background:var(--ink);color:var(--ivory);
@@ -1013,19 +1027,19 @@ const SITE = "https://jadedrose.co.uk/products/";
 const PRODUCTS = [
   {id:"jade-white", name:"Jade White Cotton Bustier Corset Midi Dress", price:75,
    img:CDN+"26_1200x1200.jpg?v=1785338455", url:SITE+"jade-vanilla-corset-midi-dress",
-   cats:["midi"], rating:3.6, reviews:5, badge:null,
+   cats:["midi"], family:"jade", colour:{name:"White", hex:"#EFEAE0"}, rating:3.6, reviews:5, badge:null,
    desc:"A timeless statement in soft white — sculpted bustier bodice with underwired cups, hidden pockets and a gathered midi skirt. 98% cotton."},
   {id:"edith-navy", name:"Edith Bandeau Corset Maxi Dress in Navy Blue", price:79,
    img:CDN+"REETA-NAVY-1_1200x1200.jpg?v=1751277205", url:SITE+"edith-bandeau-corset-maxi-dress-in-navy-blue",
-   cats:["maxi"], rating:4.0, reviews:12, badge:null,
+   cats:["maxi"], family:"edith", colour:{name:"Navy", hex:"#2A3450"}, rating:4.0, reviews:12, badge:null,
    desc:"A sculpted corset bodice with a folded bandeau neckline and a sweeping full skirt — made for weddings, black-tie and race days."},
   {id:"edith-burgundy", name:"Edith Burgundy Bandeau Corset Gown Maxi Dress", price:79,
    img:CDN+"EDITH-BURGUNDY-4-jpg_1200x1200.jpg?v=1761567143", url:SITE+"edith-bandeau-gown-maxi-dress-in-burgundy",
-   cats:["maxi"], rating:1.8, reviews:5, badge:null,
+   cats:["maxi"], family:"edith", colour:{name:"Burgundy", hex:"#5E1F2A"}, rating:1.8, reviews:5, badge:null,
    desc:"The Edith reimagined in deep burgundy — cinching corset bodice, floor-sweeping layered skirt and hidden side pockets."},
   {id:"jade-black", name:"Jade Black Cotton Bustier Corset Midi Dress", price:75,
    img:CDN+"CORINTHIA-BLACK-2_1200x1200.jpg?v=1751277378", url:SITE+"jade-black-cotton-corset-midi-dress",
-   cats:["midi"], rating:5.0, reviews:3, badge:null,
+   cats:["midi"], family:"jade", colour:{name:"Black", hex:"#211D19"}, rating:5.0, reviews:3, badge:null,
    desc:"Comfort with contour — rich black cotton, structured bust with internal shaping, and functional hidden pockets."},
   {id:"cerra-navy", name:"Cerra Navy Sweetheart Gown Maxi Dress", price:85,
    img:CDN+"CERRA-NAVY-1-jpg_1200x1200.jpg?v=1761826020", url:SITE+"cerra-navy-sweetheart-gown-maxi-dress",
@@ -1033,11 +1047,11 @@ const PRODUCTS = [
    desc:"Sweetheart cami neckline, panelled bodice and a full gathered skirt in deep navy cotton — for graduations and formal evenings."},
   {id:"jade-olive", name:"Jade Olive Corset Midi Dress", price:75,
    img:CDN+"JADE-GREEN-1-jpg_1200x1200.jpg?v=1761567379", url:SITE+"jade-olive-corset-midi-dress",
-   cats:["midi"], rating:3.2, reviews:6, badge:null,
+   cats:["midi"], family:"jade", colour:{name:"Olive", hex:"#67693E"}, rating:3.2, reviews:6, badge:null,
    desc:"Rich olive green with a corset-inspired bodice, internal boning, adjustable straps and hidden pockets."},
   {id:"jade-babyblue", name:"Jade Baby Blue Cotton Corset Midi Dress", price:75,
    img:CDN+"JADE-BBLUE-1_1200x1200.jpg?v=1778773693", url:SITE+"jade-baby-blue-cotton-corset-midi-dress",
-   cats:["midi"], rating:null, reviews:0, badge:"new",
+   cats:["midi"], family:"jade", colour:{name:"Baby Blue", hex:"#B9CDDF"}, rating:null, reviews:0, badge:"new",
    desc:"A soft icy hue with a sculpted bodice, underwired cups and barely-there adjustable straps. Gathered midi skirt with pockets."},
   {id:"daisy-skirt", name:"Daisy White Box Pleat Cotton Maxi Skater Skirt", price:50,
    img:CDN+"DAISY-SKIRT-1-jpg_1200x1200.jpg?v=1761830225", url:SITE+"daisy-white-box-pleat-cotton-maxi-skirt",
@@ -1088,9 +1102,22 @@ function priceRow(p){
     : `<span class="price">${gbp(p.price)}</span>`;
 }
 
-function renderGrid(filter){
-  const list = filter==="all" ? PRODUCTS : PRODUCTS.filter(p=>p.cats.includes(filter));
-  grid.innerHTML = list.map(p=>`
+/* colour families — one card per style, swatches swap the variant in place */
+const familyChoice = {};
+function variantsOf(p){
+  return p.family ? PRODUCTS.filter(x=>x.family===p.family) : [p];
+}
+function swatchRow(p, attr, cls=""){
+  const vs = variantsOf(p);
+  if(vs.length<2) return "";
+  return `<div class="swatch-row ${cls}" role="group" aria-label="Colour options">
+    ${vs.map(v=>`<button class="swatch ${v.id===p.id?"is-on":""}" style="--sw:${v.colour.hex}" ${attr}="${v.id}" aria-pressed="${v.id===p.id}" aria-label="Colour: ${v.colour.name}" title="${v.colour.name}"></button>`).join("")}
+    <span class="swatch-label">${p.colour.name}</span>
+  </div>`;
+}
+
+function cardHTML(p){
+  return `
     <article class="card" data-id="${p.id}">
       <div class="card-media">
         ${badgeFor(p)}
@@ -1111,11 +1138,33 @@ function renderGrid(filter){
       <div class="card-info">
         <h3 class="card-name"><a href="${p.url}" target="_blank" rel="noopener">${p.name}</a></h3>
         <div class="card-meta">${priceRow(p)}</div>
+        ${swatchRow(p, "data-swap")}
         ${starRow(p)}
       </div>
-    </article>`).join("");
+    </article>`;
+}
+
+function renderGrid(filter){
+  const seen = new Set();
+  const list = [];
+  for(const p of PRODUCTS){
+    if(filter!=="all" && !p.cats.includes(filter)) continue;
+    if(!p.family){ list.push(p); continue; }
+    if(seen.has(p.family)) continue;
+    seen.add(p.family);
+    const chosen = PRODUCTS.find(x=>x.id===familyChoice[p.family]);
+    list.push(chosen && (filter==="all" || chosen.cats.includes(filter)) ? chosen : p);
+  }
+  grid.innerHTML = list.map(cardHTML).join("");
 }
 renderGrid("all");
+
+function swapGridCard(p){
+  familyChoice[p.family] = p.id;
+  const ids = variantsOf(p).map(v=>v.id);
+  const card = [...grid.querySelectorAll(".card")].find(c=>ids.includes(c.dataset.id));
+  if(card) card.outerHTML = cardHTML(p);
+}
 
 document.querySelectorAll(".tab").forEach(t=>{
   t.addEventListener("click", ()=>{
@@ -1127,6 +1176,8 @@ document.querySelectorAll(".tab").forEach(t=>{
 });
 
 grid.addEventListener("click", e=>{
+  const sw = e.target.closest("[data-swap]");
+  if(sw){ swapGridCard(PRODUCTS.find(x=>x.id===sw.dataset.swap)); return; }
   const add = e.target.closest("[data-add]");
   if(add){ addToBag(add.dataset.add, add.dataset.size); return; }
   const eye = e.target.closest("[data-qv]");
@@ -1220,6 +1271,7 @@ function openQuickView(id){
       <div class="qv-price-row">${priceRow(p)}</div>
       ${starRow(p)}
       <p class="qv-desc" style="margin-top:14px">${p.desc}</p>
+      ${swatchRow(p, "data-qvswap", "swatch-row--qv")}
       <p class="qv-label"><span>Select size — UK</span><button data-open-sizeguide>Size guide</button></p>
       <div class="size-row" id="qvSizes">
         ${SIZES.map(s=>`<button data-qvsize="${s}">${s}</button>`).join("")}
@@ -1236,6 +1288,13 @@ function openQuickView(id){
   openLayer(qvModal);
 }
 qvBody.addEventListener("click", e=>{
+  const v = e.target.closest("[data-qvswap]");
+  if(v){
+    const np = PRODUCTS.find(x=>x.id===v.dataset.qvswap);
+    swapGridCard(np);
+    openQuickView(np.id);
+    return;
+  }
   const s = e.target.closest("[data-qvsize]");
   if(s){
     qvSel.size = s.dataset.qvsize;
