@@ -1,0 +1,38 @@
+<div class="util-head">
+  <p class="eyebrow">{{ shop.name }}</p>
+  <h1 class="sec-title display">Collections</h1>
+</div>
+
+{%- paginate collections by 24 -%}
+  <div class="grid coll-grid">
+    {%- for collection in collections -%}
+      <a class="card" href="{{ collection.url }}">
+        <div class="card-media">
+          {%- if collection.featured_image -%}
+            {{ collection.featured_image | image_url: width: 800 | image_tag: alt: collection.title, loading: 'lazy', widths: '360, 540, 800' }}
+          {%- else -%}
+            {{ 'collection-2' | placeholder_svg_tag }}
+          {%- endif -%}
+        </div>
+        <div class="card-info">
+          <h3 class="card-name">{{ collection.title }}</h3>
+          <span class="price">{{ collection.products_count }} piece{% if collection.products_count != 1 %}s{% endif %}</span>
+        </div>
+      </a>
+    {%- endfor -%}
+  </div>
+
+  {%- if paginate.pages > 1 -%}
+    <nav class="pagination" aria-label="Pagination">
+      {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}">&larr; Prev</a>{%- endif -%}
+      {%- if paginate.next -%}<a href="{{ paginate.next.url }}">Next &rarr;</a>{%- endif -%}
+    </nav>
+  {%- endif -%}
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "Collections list",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,30 @@
+<div class="account-wrap">
+  <h1 class="account-title display">Create account</h1>
+  <p class="account-sub">Join {{ shop.name }} for faster checkout and order history.</p>
+
+  {%- form 'create_customer' -%}
+    {%- if form.errors -%}
+      <div class="form-status form-status--bad">{{ form.errors | default_errors }}</div>
+    {%- endif -%}
+    <div class="field">
+      <label for="RegFirstName">First name</label>
+      <input type="text" id="RegFirstName" name="customer[first_name]" autocomplete="given-name">
+    </div>
+    <div class="field">
+      <label for="RegLastName">Last name</label>
+      <input type="text" id="RegLastName" name="customer[last_name]" autocomplete="family-name">
+    </div>
+    <div class="field">
+      <label for="RegEmail">Email</label>
+      <input type="email" id="RegEmail" name="customer[email]" autocomplete="email" required>
+    </div>
+    <div class="field">
+      <label for="RegPassword">Password</label>
+      <input type="password" id="RegPassword" name="customer[password]" autocomplete="new-password" required>
+    </div>
+    <button type="submit" class="btn btn--full">Create account</button>
+    <div class="account-links">
+      <a href="{{ routes.account_login_url }}">Already have an account? Sign in</a>
+    </div>
+  {%- endform -%}
+</div>

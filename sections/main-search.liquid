@@ -1,0 +1,71 @@
+<div class="util-head">
+  <p class="eyebrow">{{ shop.name }}</p>
+  <h1 class="sec-title display">Search</h1>
+  <form action="{{ routes.search_url }}" method="get" role="search" class="search-form">
+    <input
+      type="search"
+      name="q"
+      value="{{ search.terms | escape }}"
+      placeholder="Search dresses, gowns, skirts…"
+      aria-label="Search"
+      autocomplete="off"
+    >
+    <button type="submit">Search</button>
+  </form>
+  {%- if search.performed -%}
+    <p class="coll-desc">
+      {%- if search.results_count == 0 -%}
+        Nothing found for &ldquo;{{ search.terms | escape }}&rdquo; — try another word.
+      {%- else -%}
+        {{ search.results_count }} result{% if search.results_count != 1 %}s{% endif %} for &ldquo;{{ search.terms | escape }}&rdquo;
+      {%- endif -%}
+    </p>
+  {%- endif -%}
+</div>
+
+{%- if search.performed and search.results_count > 0 -%}
+  {%- paginate search.results by 24 -%}
+    <div class="grid coll-grid">
+      {%- for item in search.results -%}
+        {%- if item.object_type == 'product' -%}
+          {% render 'product-card', product: item %}
+        {%- else -%}
+          <div class="card">
+            <div class="card-info">
+              <p class="eyebrow">{{ item.object_type | capitalize }}</p>
+              <h3 class="card-name"><a href="{{ item.url }}">{{ item.title }}</a></h3>
+              {%- if item.content -%}
+                <p style="font-size:13px;color:var(--muted)">{{ item.content | strip_html | truncate: 120 }}</p>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    {%- if paginate.pages > 1 -%}
+      <nav class="pagination" aria-label="Pagination">
+        {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}">&larr; Prev</a>{%- endif -%}
+        {%- for part in paginate.parts -%}
+          {%- if part.is_link -%}
+            <a href="{{ part.url }}">{{ part.title }}</a>
+          {%- elsif part.title == paginate.current_page -%}
+            <span class="current">{{ part.title }}</span>
+          {%- else -%}
+            <span>{{ part.title }}</span>
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if paginate.next -%}<a href="{{ paginate.next.url }}">Next &rarr;</a>{%- endif -%}
+      </nav>
+    {%- endif -%}
+  {%- endpaginate -%}
+{%- else -%}
+  <div style="padding-bottom:80px"></div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Search",
+  "settings": []
+}
+{% endschema %}

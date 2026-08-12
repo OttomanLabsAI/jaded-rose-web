@@ -1,0 +1,31 @@
+{%- assign coll = product.collections.first -%}
+{%- if coll and coll.products_count > 1 -%}
+  <section class="section section--porcelain section--hairline">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        <h2 class="sec-title display">{{ section.settings.heading | escape }}</h2>
+      </div>
+      <a class="sec-link" href="{{ coll.url }}">View all</a>
+    </div>
+    <div class="grid">
+      {%- assign shown = 0 -%}
+      {%- for p in coll.products -%}
+        {%- if p.id != product.id and shown < 4 -%}
+          {%- assign shown = shown | plus: 1 -%}
+          {% render 'product-card', product: p %}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Related products",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Complete the look" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "You may also like" }
+  ]
+}
+{% endschema %}

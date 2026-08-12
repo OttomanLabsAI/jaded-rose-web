@@ -1,0 +1,15 @@
+{
+  "current": {
+    "logo_width": 140,
+    "color_background": "#FFFFFF",
+    "color_secondary_background": "#F7F4F0",
+    "color_text": "#161311",
+    "color_accent": "#5E1F2A",
+    "social_instagram": "https://instagram.com/jadedroselondon",
+    "social_tiktok": "https://tiktok.com/@jadedroselondon",
+    "social_twitter": "https://twitter.com/jadedroselondon",
+    "social_facebook": "https://facebook.com/jadedroselondon",
+    "card_hover_swap": true,
+    "card_show_swatches": true
+  }
+}

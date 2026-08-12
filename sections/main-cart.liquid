@@ -1,0 +1,77 @@
+<div class="cart-wrap">
+  <div class="util-head" style="padding:0 0 34px">
+    <p class="eyebrow">{{ shop.name }}</p>
+    <h1 class="sec-title display">Your bag</h1>
+  </div>
+
+  {%- if cart.item_count == 0 -%}
+    <div class="empty-note">
+      <p class="display">Your bag is empty</p>
+      <p>Beautiful things are waiting.</p>
+      <p style="margin-top:26px"><a class="btn" href="{{ routes.all_products_collection_url }}">Continue shopping</a></p>
+    </div>
+  {%- else -%}
+    <form action="{{ routes.cart_url }}" method="post">
+      {%- for item in cart.items -%}
+        <div class="cart-line">
+          <a href="{{ item.url }}">
+            {%- if item.image -%}
+              {{ item.image | image_url: width: 240 | image_tag: alt: item.title, loading: 'lazy', widths: '120, 240' }}
+            {%- endif -%}
+          </a>
+          <div>
+            <p class="cl-name"><a href="{{ item.url }}">{{ item.product.title }}</a></p>
+            {%- unless item.product.has_only_default_variant -%}
+              <p class="cl-variant">{{ item.variant.title }}</p>
+            {%- endunless -%}
+            {%- if item.selling_plan_allocation -%}
+              <p class="cl-variant">{{ item.selling_plan_allocation.selling_plan.name }}</p>
+            {%- endif -%}
+            <div class="qty">
+              <button type="button" data-qty-step="-1" aria-label="Decrease quantity">&minus;</button>
+              <input
+                type="number"
+                value="{{ item.quantity }}"
+                min="0"
+                aria-label="Quantity for {{ item.product.title | escape }}"
+                data-cart-line-qty="{{ forloop.index }}"
+              >
+              <button type="button" data-qty-step="1" aria-label="Increase quantity">+</button>
+            </div>
+          </div>
+          <div class="cl-right">
+            <span class="cl-price">
+              {%- if item.original_line_price != item.final_line_price -%}
+                <s class="price-was">{{ item.original_line_price | money }}</s>
+              {%- endif -%}
+              {{ item.final_line_price | money }}
+            </span>
+            <a class="cl-remove" href="{{ item.url_to_remove }}">Remove</a>
+          </div>
+        </div>
+      {%- endfor -%}
+
+      <div class="cart-foot">
+        <div class="cart-note">
+          <label for="CartNote">Order note</label>
+          <textarea id="CartNote" name="note">{{ cart.note }}</textarea>
+        </div>
+        <div class="cart-sum">
+          <p class="cart-sub"><span>Subtotal</span><b>{{ cart.total_price | money }}</b></p>
+          {%- if cart.total_discount > 0 -%}
+            <p class="cart-hint">You're saving {{ cart.total_discount | money }}</p>
+          {%- endif -%}
+          <p class="cart-hint">Taxes and shipping calculated at checkout.</p>
+          <button type="submit" name="checkout" class="btn btn--full">Checkout</button>
+        </div>
+      </div>
+    </form>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Cart",
+  "settings": []
+}
+{% endschema %}

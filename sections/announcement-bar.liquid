@@ -1,0 +1,45 @@
+{%- if section.blocks.size > 0 -%}
+  <div class="announce" aria-live="polite">
+    {%- for block in section.blocks -%}
+      <span {% if forloop.first %}class="is-on"{% endif %} {{ block.shopify_attributes }}>
+        {%- if block.settings.link != blank -%}
+          <a href="{{ block.settings.link }}">{{ block.settings.text | escape }}</a>
+        {%- else -%}
+          {{ block.settings.text | escape }}
+        {%- endif -%}
+      </span>
+    {%- endfor -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Message",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Standard delivery 1–5 working days · Next day available"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "message", "settings": { "text": "Standard delivery 1–5 working days · Next day available" } },
+      { "type": "message", "settings": { "text": "Full refund or free exchange if the item is unsuitable" } }
+    ]
+  }
+}
+{% endschema %}

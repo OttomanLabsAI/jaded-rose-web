@@ -1,0 +1,13 @@
+{%- comment -%} Price display. Accepts: product. {%- endcomment -%}
+{%- if product.compare_at_price > product.price -%}
+  <span class="price price--sale">
+    {%- if product.price_varies %}From {% endif -%}
+    {{ product.price | money }}
+  </span>
+  <s class="price-was">{{ product.compare_at_price | money }}</s>
+{%- else -%}
+  <span class="price">
+    {%- if product.price_varies %}From {% endif -%}
+    {{ product.price | money }}
+  </span>
+{%- endif -%}

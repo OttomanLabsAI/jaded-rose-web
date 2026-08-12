@@ -1,0 +1,20 @@
+<div class="account-wrap">
+  <h1 class="account-title display">Activate account</h1>
+  <p class="account-sub">Create a password to activate your {{ shop.name }} account.</p>
+
+  {%- form 'activate_customer_password' -%}
+    {%- if form.errors -%}
+      <div class="form-status form-status--bad">{{ form.errors | default_errors }}</div>
+    {%- endif -%}
+    <div class="field">
+      <label for="ActivatePassword">Password</label>
+      <input type="password" id="ActivatePassword" name="customer[password]" autocomplete="new-password" required>
+    </div>
+    <div class="field">
+      <label for="ActivatePasswordConfirm">Confirm password</label>
+      <input type="password" id="ActivatePasswordConfirm" name="customer[password_confirmation]" autocomplete="new-password" required>
+    </div>
+    <button type="submit" class="btn btn--full">Activate account</button>
+    <button type="submit" class="btn btn--ghost btn--full" name="decline" style="margin-top:12px">Decline invitation</button>
+  {%- endform -%}
+</div>

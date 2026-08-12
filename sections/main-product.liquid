@@ -1,0 +1,130 @@
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+<article class="product" data-product-form data-money-format="{{ shop.money_format | strip_html | escape }}">
+  <div class="product-gallery">
+    {%- if product.media.size > 0 -%}
+      {%- for media in product.media -%}
+        {%- if media.media_type == 'image' -%}
+          {%- liquid
+            assign img_loading = 'lazy'
+            if forloop.first
+              assign img_loading = 'eager'
+            endif
+          -%}
+          {{ media | image_url: width: 1400 | image_tag:
+            alt: media.alt | default: product.title,
+            loading: img_loading,
+            sizes: '(max-width: 1080px) 100vw, 58vw',
+            widths: '540, 750, 1100, 1400'
+          }}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag }}
+    {%- endif -%}
+  </div>
+
+  <div class="product-info">
+    <p class="eyebrow product-vendor">{{ product.vendor | default: shop.name }}</p>
+    <h1 class="product-title display">{{ product.title }}</h1>
+
+    <div class="product-price-row">
+      <span class="price {% if current_variant.compare_at_price > current_variant.price %}price--sale{% endif %}" data-price>
+        {{- current_variant.price | money -}}
+      </span>
+      <s class="price-was" data-compare-price {% unless current_variant.compare_at_price > current_variant.price %}hidden{% endunless %}>
+        {%- if current_variant.compare_at_price -%}{{ current_variant.compare_at_price | money }}{%- endif -%}
+      </s>
+    </div>
+
+    {%- form 'product', product, data-ajax-cart: '' -%}
+      <input type="hidden" name="id" value="{{ current_variant.id }}">
+
+      {%- unless product.has_only_default_variant -%}
+        {%- for option in product.options_with_values -%}
+          {%- assign option_name_down = option.name | downcase -%}
+          {%- assign is_colour = false -%}
+          {%- if option_name_down == 'colour' or option_name_down == 'color' -%}
+            {%- assign is_colour = true -%}
+          {%- endif -%}
+
+          <p class="option-label" id="OptionLabel-{{ section.id }}-{{ forloop.index0 }}">
+            <span>{{ option.name }}</span>
+            <span class="option-value" data-selected-value="{{ forloop.index0 }}">{{ option.selected_value }}</span>
+          </p>
+          <div
+            class="option-values"
+            role="group"
+            aria-labelledby="OptionLabel-{{ section.id }}-{{ forloop.index0 }}"
+            data-option-index="{{ forloop.index0 }}"
+          >
+            {%- for value in option.values -%}
+              <button
+                type="button"
+                class="{% if is_colour %}swatch{% else %}swatch-chip{% endif %} {% if value == option.selected_value %}is-on{% endif %}"
+                data-value="{{ value | escape }}"
+                {% if is_colour %}data-colour="{{ value | handleize }}"{% endif %}
+                aria-pressed="{% if value == option.selected_value %}true{% else %}false{% endif %}"
+                aria-label="{{ option.name }}: {{ value | escape }}"
+                title="{{ value | escape }}"
+              >
+                {%- unless is_colour -%}{{ value }}{%- endunless -%}
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endfor -%}
+      {%- endunless -%}
+
+      <div class="qty-row">
+        <div class="qty">
+          <button type="button" data-qty-step="-1" aria-label="Decrease quantity">&minus;</button>
+          <input type="number" name="quantity" value="1" min="1" aria-label="Quantity">
+          <button type="button" data-qty-step="1" aria-label="Increase quantity">+</button>
+        </div>
+        <button
+          type="submit"
+          class="btn"
+          data-add-button
+          data-label-add="Add to bag"
+          data-label-soldout="Sold out"
+          {% unless current_variant.available %}aria-disabled="true"{% endunless %}
+        >
+          {%- if current_variant.available -%}Add to bag{%- else -%}Sold out{%- endif -%}
+        </button>
+      </div>
+      <p class="product-unavailable" data-availability {% if current_variant.available %}hidden{% endif %}>
+        This size is currently sold out — check back soon.
+      </p>
+    {%- endform -%}
+
+    {%- if product.description != blank -%}
+      <div class="product-desc rte">{{ product.description }}</div>
+    {%- endif -%}
+
+    <div class="product-service">
+      {%- for block in section.blocks -%}
+        <span {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</span>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <script type="application/json" data-product-json>
+    {{ product | json }}
+  </script>
+</article>
+
+{% schema %}
+{
+  "name": "Product",
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "note",
+      "name": "Service note",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Standard delivery 1–5 working days · Next day available" }
+      ]
+    }
+  ]
+}
+{% endschema %}

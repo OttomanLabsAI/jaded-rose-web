@@ -1,0 +1,44 @@
+<section class="section--hairline">
+  <div class="service-grid">
+    {%- for block in section.blocks -%}
+      <div class="svc" {{ block.shopify_attributes }}>
+        <h3>{{ block.settings.title | escape }}</h3>
+        <p>
+          {{ block.settings.text | escape }}
+          {%- if block.settings.link_label != blank and block.settings.link != blank %}
+            <a href="{{ block.settings.link }}">{{ block.settings.link_label | escape }}</a>
+          {%- endif -%}
+        </p>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Services",
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "service",
+      "name": "Service",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Delivery" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Standard delivery is 1–5 working days. Next day delivery available." },
+        { "type": "text", "id": "link_label", "label": "Link label" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Services",
+      "blocks": [
+        { "type": "service", "settings": { "title": "Delivery", "text": "Standard delivery is 1–5 working days. Next day delivery available." } },
+        { "type": "service", "settings": { "title": "Returns", "text": "Shop with confidence — full refund or free exchange if the item is unsuitable." } },
+        { "type": "service", "settings": { "title": "Fit", "text": "UK sizes 6–18, measured in inches and centimetres." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

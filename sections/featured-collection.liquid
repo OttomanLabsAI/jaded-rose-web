@@ -1,0 +1,55 @@
+<section class="section {% if section.settings.tint %}section--porcelain section--hairline{% endif %}">
+  <div class="sec-head">
+    <div>
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="sec-title display">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+    </div>
+    {%- if section.settings.collection != blank -%}
+      <a class="sec-link" href="{{ section.settings.collection.url }}">View all</a>
+    {%- endif -%}
+  </div>
+
+  <div class="grid">
+    {%- if section.settings.collection != blank -%}
+      {%- for product in section.settings.collection.products limit: section.settings.limit -%}
+        {% render 'product-card', product: product %}
+      {%- endfor -%}
+    {%- else -%}
+      {%- for i in (1..section.settings.limit) -%}
+        <div class="card">
+          <div class="card-media">{{ 'product-1' | placeholder_svg_tag }}</div>
+          <div class="card-info">
+            <h3 class="card-name">Example product</h3>
+            <div class="card-meta"><span class="price">£75.00</span></div>
+          </div>
+        </div>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Best sellers" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Your favourites" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    {
+      "type": "range",
+      "id": "limit",
+      "min": 4,
+      "max": 12,
+      "step": 4,
+      "label": "Products shown",
+      "default": 8
+    },
+    { "type": "checkbox", "id": "tint", "label": "Porcelain background", "default": true }
+  ],
+  "presets": [{ "name": "Featured collection" }]
+}
+{% endschema %}

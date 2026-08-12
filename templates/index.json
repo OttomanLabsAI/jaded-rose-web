@@ -1,0 +1,115 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "height": "full",
+        "align": "left",
+        "eyebrow": "Jaded Rose · London",
+        "heading": "Timeless design, for the girl who wants it all",
+        "subheading": "Sultry, structured occasionwear — corseted cottons and floor-sweeping gowns, cut in London for every moment worth dressing for.",
+        "cta_label": "Shop new in",
+        "cta2_label": "Explore the sale"
+      }
+    },
+    "rail": {
+      "type": "collection-rail",
+      "blocks": {
+        "rail-1": { "type": "collection" },
+        "rail-2": { "type": "collection" },
+        "rail-3": { "type": "collection" },
+        "rail-4": { "type": "collection" },
+        "rail-5": { "type": "collection" }
+      },
+      "block_order": ["rail-1", "rail-2", "rail-3", "rail-4", "rail-5"],
+      "settings": {
+        "eyebrow": "Shop by occasion",
+        "heading": "Dressed for the moment",
+        "link_label": "Shop everything"
+      }
+    },
+    "favourites": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "Best sellers",
+        "heading": "Your favourites",
+        "limit": 8,
+        "tint": true
+      }
+    },
+    "editorial": {
+      "type": "editorial",
+      "blocks": {
+        "tile-1": { "type": "tile", "settings": { "caption": "The Romance Edit" } },
+        "tile-2": { "type": "tile", "settings": { "caption": "The Eden Edit" } }
+      },
+      "block_order": ["tile-1", "tile-2"],
+      "settings": {
+        "eyebrow": "Our story",
+        "quote": "<p>Born out of the love for high quality, and specially curated looks.</p>",
+        "text": "Jaded Rose brings you sultry and authentic pieces that leave you wanting more.",
+        "cta_label": "The brand"
+      }
+    },
+    "reviews": {
+      "type": "reviews",
+      "blocks": {
+        "rev-1": {
+          "type": "review",
+          "settings": {
+            "quote": "Lovely dress, fits perfectly. Looks exactly like in the picture. Delivery was quick.",
+            "author": "Kerry — Jade Black Corset Midi"
+          }
+        },
+        "rev-2": {
+          "type": "review",
+          "settings": {
+            "quote": "Loved this dress — I actually ordered it as a back up but ended up wearing it. Got so many compliments all day.",
+            "author": "Hannah — Cerra Navy Gown"
+          }
+        },
+        "rev-3": {
+          "type": "review",
+          "settings": {
+            "quote": "Great fit — the bodice complements and slims. Loved the pockets in the skirt too.",
+            "author": "Verified buyer — Jade Olive Midi"
+          }
+        }
+      },
+      "block_order": ["rev-1", "rev-2", "rev-3"],
+      "settings": {
+        "eyebrow": "From the Jaded girls",
+        "heading": "Worn & loved"
+      }
+    },
+    "services": {
+      "type": "services",
+      "blocks": {
+        "svc-1": {
+          "type": "service",
+          "settings": {
+            "title": "Delivery",
+            "text": "Standard delivery is 1–5 working days. Next day delivery available."
+          }
+        },
+        "svc-2": {
+          "type": "service",
+          "settings": {
+            "title": "Returns",
+            "text": "Shop with confidence — full refund or free exchange if the item is unsuitable."
+          }
+        },
+        "svc-3": {
+          "type": "service",
+          "settings": {
+            "title": "Fit",
+            "text": "UK sizes 6–18, measured in inches and centimetres."
+          }
+        }
+      },
+      "block_order": ["svc-1", "svc-2", "svc-3"],
+      "settings": {}
+    }
+  },
+  "order": ["hero", "rail", "favourites", "editorial", "reviews", "services"]
+}

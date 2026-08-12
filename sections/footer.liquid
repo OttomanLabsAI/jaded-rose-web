@@ -1,0 +1,100 @@
+<footer class="foot">
+  <div class="foot-grid">
+    <div class="foot-news">
+      <div class="foot-logo">
+        {%- if settings.logo -%}
+          {{ settings.logo | image_url: width: 400 | image_tag: alt: shop.name, width: 130 }}
+        {%- else -%}
+          <span class="brand-word display">{{ shop.name }}</span>
+        {%- endif -%}
+      </div>
+      <h4>{{ section.settings.newsletter_heading | escape }}</h4>
+      <p>{{ section.settings.newsletter_text | escape }}</p>
+      {%- form 'customer', class: 'news-signup' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="news-form">
+          <input
+            type="email"
+            name="contact[email]"
+            placeholder="Email address"
+            aria-label="Email address"
+            autocomplete="email"
+            required
+          >
+          <button type="submit">Join &rarr;</button>
+        </div>
+        {%- if form.posted_successfully? -%}
+          <p class="news-ok">You're on the list.</p>
+        {%- elsif form.errors -%}
+          <p class="news-ok">{{ form.errors.translated_fields.email }} {{ form.errors.messages.email }}</p>
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+
+    <div>
+      <h4>{{ section.settings.menu_heading | escape }}</h4>
+      {%- if section.settings.menu != blank -%}
+        <ul class="foot-list">
+          {%- for link in section.settings.menu.links -%}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+
+    <div>
+      <h4>Follow</h4>
+      <ul class="foot-list">
+        {%- if settings.social_instagram != blank -%}
+          <li><a href="{{ settings.social_instagram }}" target="_blank" rel="noopener">Instagram</a></li>
+        {%- endif -%}
+        {%- if settings.social_tiktok != blank -%}
+          <li><a href="{{ settings.social_tiktok }}" target="_blank" rel="noopener">TikTok</a></li>
+        {%- endif -%}
+        {%- if settings.social_twitter != blank -%}
+          <li><a href="{{ settings.social_twitter }}" target="_blank" rel="noopener">X</a></li>
+        {%- endif -%}
+        {%- if settings.social_facebook != blank -%}
+          <li><a href="{{ settings.social_facebook }}" target="_blank" rel="noopener">Facebook</a></li>
+        {%- endif -%}
+      </ul>
+    </div>
+  </div>
+
+  <div class="foot-base">
+    <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }} · <a href="{{ routes.root_url }}">{{ shop.domain }}</a></span>
+    <span>{{ powered_by_link }}</span>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Newsletter heading",
+      "default": "Sign up for all things Jaded Rose"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_text",
+      "label": "Newsletter text",
+      "default": "New drops, restocks and sale access — straight to your inbox."
+    },
+    {
+      "type": "text",
+      "id": "menu_heading",
+      "label": "Menu heading",
+      "default": "Customer Care"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Footer menu",
+      "default": "footer"
+    }
+  ]
+}
+{% endschema %}

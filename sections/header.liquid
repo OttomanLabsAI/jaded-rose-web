@@ -1,0 +1,108 @@
+<header class="site-head">
+  <div class="head-row">
+    <div class="head-left">
+      <button class="burger" id="BurgerBtn" aria-label="Open menu" aria-expanded="false" aria-controls="MobNav">
+        <i></i><i></i><i></i>
+      </button>
+      <a class="icon-btn" href="{{ routes.search_url }}" aria-label="Search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <span class="icon-txt">Search</span>
+      </a>
+    </div>
+
+    <a class="brand" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }} home">
+      {%- if settings.logo -%}
+        {{ settings.logo | image_url: width: 600 | image_tag: alt: shop.name, width: settings.logo_width }}
+      {%- else -%}
+        <span class="brand-word display">{{ shop.name }}</span>
+      {%- endif -%}
+    </a>
+
+    <div class="head-right">
+      {%- if shop.customer_accounts_enabled -%}
+        <a class="icon-btn" href="{{ routes.account_url }}" aria-label="Account">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
+          <span class="icon-txt">Account</span>
+        </a>
+      {%- endif -%}
+      <a class="icon-btn" href="{{ routes.cart_url }}" aria-label="Bag ({{ cart.item_count }} items)">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l1 13H5L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="icon-txt">Bag</span>
+        <span class="bag-count" data-bag-count data-count="{{ cart.item_count }}">{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+
+  {%- if section.settings.menu != blank -%}
+    <nav aria-label="Main">
+      <ul class="main-nav">
+        {%- for link in section.settings.menu.links -%}
+          <li>
+            <a href="{{ link.url }}">{{ link.title }}</a>
+            {%- if link.links.size > 0 -%}
+              <div class="dropdown">
+                {%- for child in link.links -%}
+                  <a href="{{ child.url }}">{{ child.title }}</a>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+  {%- endif -%}
+</header>
+
+<div class="scrim" id="Scrim"></div>
+
+<nav class="mob-nav" id="MobNav" aria-label="Mobile">
+  <div class="mob-nav-top">
+    <a class="brand" href="{{ routes.root_url }}">
+      {%- if settings.logo -%}
+        {{ settings.logo | image_url: width: 400 | image_tag: alt: shop.name, width: 120 }}
+      {%- else -%}
+        <span class="brand-word display">{{ shop.name }}</span>
+      {%- endif -%}
+    </a>
+    <button class="mob-close" id="MobClose" aria-label="Close menu">&times;</button>
+  </div>
+
+  {%- if section.settings.menu != blank -%}
+    {%- for link in section.settings.menu.links -%}
+      <div class="mob-group">
+        {%- if link.links.size > 0 -%}
+          <button type="button" aria-expanded="false">{{ link.title }}</button>
+          <div class="mob-sub">
+            {%- for child in link.links -%}
+              <a href="{{ child.url }}">{{ child.title }}</a>
+            {%- endfor -%}
+          </div>
+        {%- else -%}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  {%- endif -%}
+
+  <div class="mob-util">
+    <a href="{{ routes.search_url }}">Search</a>
+    {%- if shop.customer_accounts_enabled -%}
+      <a href="{{ routes.account_url }}">Account</a>
+    {%- endif -%}
+    <a href="{{ routes.cart_url }}">Bag</a>
+  </div>
+</nav>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+
+  <title>
+    {{- page_title -}}
+    {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+    {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+    {%- unless page_title contains shop.name %} | {{ shop.name }}{% endunless -%}
+  </title>
+
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+
+  <link rel="canonical" href="{{ canonical_url }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+
+  {% style %}
+    :root{
+      --paper: {{ settings.color_background | default: '#FFFFFF' }};
+      --porcelain: {{ settings.color_secondary_background | default: '#F7F4F0' }};
+      --ink: {{ settings.color_text | default: '#161311' }};
+      --accent: {{ settings.color_accent | default: '#5E1F2A' }};
+      --logo-w: {{ settings.logo_width | default: 140 }}px;
+    }
+  {% endstyle %}
+
+  {%- liquid
+    assign og_image = page_image | default: settings.logo
+  -%}
+  <meta property="og:site_name" content="{{ shop.name }}">
+  <meta property="og:title" content="{{ page_title | escape }}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ canonical_url }}">
+  {%- if og_image -%}
+    <meta property="og:image" content="https:{{ og_image | image_url: width: 1200 }}">
+  {%- endif -%}
+
+  {{ content_for_header }}
+</head>
+
+<body class="template-{{ request.page_type | handle }}">
+  <a class="skip-link" href="#MainContent">Skip to content</a>
+
+  {% section 'announcement-bar' %}
+  {% section 'header' %}
+
+  <main id="MainContent" role="main" tabindex="-1">
+    {{ content_for_layout }}
+  </main>
+
+  {% section 'footer' %}
+
+  <div class="toast" id="Toast" role="status" aria-live="polite"><i></i><span id="ToastMsg"></span></div>
+
+  <script src="{{ 'global.js' | asset_url }}" defer></script>
+</body>
+</html>

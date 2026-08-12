@@ -1,0 +1,51 @@
+<div class="account-wrap account-wrap--wide">
+  <h1 class="account-title display">Order {{ order.name }}</h1>
+  <p class="account-sub">Placed {{ order.created_at | date: '%B %d, %Y' }} · {{ order.financial_status_label }}</p>
+  <div class="account-links" style="margin-bottom:44px">
+    <a href="{{ routes.account_url }}">Back to account</a>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr><th>Item</th><th>Qty</th><th>Price</th><th>Total</th></tr>
+    </thead>
+    <tbody>
+      {%- for line_item in order.line_items -%}
+        <tr>
+          <td>
+            {{ line_item.title }}
+            {%- unless line_item.product.has_only_default_variant -%}
+              <br><span style="color:var(--muted);font-size:12px">{{ line_item.variant.title }}</span>
+            {%- endunless -%}
+          </td>
+          <td>{{ line_item.quantity }}</td>
+          <td>{{ line_item.final_price | money }}</td>
+          <td>{{ line_item.final_line_price | money }}</td>
+        </tr>
+      {%- endfor -%}
+    </tbody>
+    <tfoot>
+      <tr><td colspan="3">Subtotal</td><td>{{ order.line_items_subtotal_price | money }}</td></tr>
+      {%- for shipping_method in order.shipping_methods -%}
+        <tr><td colspan="3">Shipping ({{ shipping_method.title }})</td><td>{{ shipping_method.price | money }}</td></tr>
+      {%- endfor -%}
+      {%- for tax_line in order.tax_lines -%}
+        <tr><td colspan="3">Tax ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)</td><td>{{ tax_line.price | money }}</td></tr>
+      {%- endfor -%}
+      <tr><td colspan="3"><b>Total</b></td><td><b>{{ order.total_price | money }}</b></td></tr>
+    </tfoot>
+  </table>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:44px">
+    <div class="addr-card">
+      <h4 class="eyebrow" style="margin-bottom:12px">Billing address</h4>
+      <p>{{ order.billing_address | format_address }}</p>
+    </div>
+    {%- if order.shipping_address -%}
+      <div class="addr-card">
+        <h4 class="eyebrow" style="margin-bottom:12px">Shipping address</h4>
+        <p>{{ order.shipping_address | format_address }}</p>
+      </div>
+    {%- endif -%}
+  </div>
+</div>

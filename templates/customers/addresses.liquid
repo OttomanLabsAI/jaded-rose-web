@@ -1,0 +1,41 @@
+<div class="account-wrap">
+  <h1 class="account-title display">Addresses</h1>
+  <div class="account-links" style="margin-bottom:40px">
+    <a href="{{ routes.account_url }}">Back to account</a>
+  </div>
+
+  {%- paginate customer.addresses by 10 -%}
+    {%- for address in customer.addresses -%}
+      <div class="addr-card">
+        {%- if address == customer.default_address -%}
+          <p class="eyebrow" style="margin-bottom:10px">Default</p>
+        {%- endif -%}
+        <p>{{ address | format_address }}</p>
+        <div class="account-links" style="justify-content:flex-start;margin-top:16px">
+          <a href="#" onclick="var f=document.getElementById('EditAddress_{{ address.id }}');f.hidden=!f.hidden;return false;">Edit</a>
+          {%- form 'customer_address', address -%}
+            <a href="#" onclick="if(confirm('Delete this address?')){this.closest('form').querySelector('[name=_method]').value='delete';this.closest('form').submit();}return false;">Delete</a>
+            <input type="hidden" name="_method" value="">
+          {%- endform -%}
+        </div>
+
+        <div id="EditAddress_{{ address.id }}" hidden style="margin-top:22px">
+          {%- form 'customer_address', address -%}
+            {% render 'address-fields', form: form %}
+            <button type="submit" class="btn btn--full">Save address</button>
+          {%- endform -%}
+        </div>
+      </div>
+    {%- endfor -%}
+  {%- endpaginate -%}
+
+  <div style="margin-top:34px">
+    <button class="btn btn--ghost btn--full" onclick="var f=document.getElementById('NewAddress');f.hidden=!f.hidden;">Add a new address</button>
+    <div id="NewAddress" hidden style="margin-top:22px">
+      {%- form 'customer_address', customer.new_address -%}
+        {% render 'address-fields', form: form %}
+        <button type="submit" class="btn btn--full">Add address</button>
+      {%- endform -%}
+    </div>
+  </div>
+</div>
