@@ -34,25 +34,25 @@
         "type": "color",
         "id": "color_background",
         "label": "Background",
-        "default": "#F6F1E8"
+        "default": "#FFFFFF"
       },
       {
         "type": "color",
         "id": "color_secondary_background",
         "label": "Secondary background",
-        "default": "#FDFBF6"
+        "default": "#F8F7F7"
       },
       {
         "type": "color",
         "id": "color_text",
         "label": "Text",
-        "default": "#181310"
+        "default": "#212121"
       },
       {
         "type": "color",
         "id": "color_accent",
         "label": "Accent",
-        "default": "#5E1F2A"
+        "default": "#540016"
       }
     ]
   },
