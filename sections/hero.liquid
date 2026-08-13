@@ -1,8 +1,10 @@
 {%- liquid
-  assign height_class = 'hero--tall'
+  assign height_class = 'hero--natural'
   case section.settings.height
     when 'full'
       assign height_class = 'hero--full'
+    when 'tall'
+      assign height_class = 'hero--tall'
     when 'short'
       assign height_class = 'hero--short'
     when 'fixed'
@@ -98,12 +100,13 @@
       "id": "height",
       "label": "Height",
       "options": [
-        { "value": "full", "label": "Full screen" },
-        { "value": "tall", "label": "Tall" },
-        { "value": "fixed", "label": "Fixed band" },
-        { "value": "short", "label": "Short" }
+        { "value": "natural", "label": "Original image proportions" },
+        { "value": "full", "label": "Full screen (crops to fit)" },
+        { "value": "tall", "label": "Tall (crops to fit)" },
+        { "value": "fixed", "label": "Fixed band (crops to fit)" },
+        { "value": "short", "label": "Short (crops to fit)" }
       ],
-      "default": "full"
+      "default": "natural"
     },
     { "type": "checkbox", "id": "autoplay", "label": "Auto-rotate slides", "default": true },
     {

@@ -28,9 +28,12 @@
           }
         }
       },
-      "block_order": ["slide-1", "slide-2"],
+      "block_order": [
+        "slide-1",
+        "slide-2"
+      ],
       "settings": {
-        "height": "full",
+        "height": "natural",
         "autoplay": true,
         "autoplay_speed": 7,
         "show_dots": true
@@ -49,7 +52,7 @@
       "settings": {
         "image": "shopify://shop_images/ABB-SINGLE-7-SMALL.png",
         "image_position": "center center",
-        "height": "full",
+        "height": "natural",
         "link": "shopify://products/amya-black-sweetheart-bengaline-a-line-mini-dress",
         "alt_text": "Amya black sweetheart bengaline a-line mini dress"
       }
@@ -94,7 +97,11 @@
           }
         }
       },
-      "block_order": ["edit-1", "edit-2", "edit-3"],
+      "block_order": [
+        "edit-1",
+        "edit-2",
+        "edit-3"
+      ],
       "settings": {
         "height": "fixed",
         "autoplay": true,
@@ -121,5 +128,12 @@
       }
     }
   },
-  "order": ["hero", "brand-band", "banner", "edits", "favourites", "blog"]
+  "order": [
+    "hero",
+    "brand-band",
+    "banner",
+    "edits",
+    "favourites",
+    "blog"
+  ]
 }

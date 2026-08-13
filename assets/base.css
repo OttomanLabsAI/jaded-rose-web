@@ -240,6 +240,11 @@ body.is-locked{overflow:hidden}
 .hero--tall{min-height:74vh}
 .hero--short{min-height:52vh}
 .hero--fixed{min-height:clamp(420px,58vh,660px)}
+/* natural: the image keeps its own proportions — nothing is cropped */
+.hero--natural{display:grid;min-height:0}
+.hero--natural .slide{position:relative;inset:auto;grid-area:1/1;height:auto}
+.hero--natural .slide picture{position:static;display:block}
+.hero--natural .slide img{position:static;width:100%;height:auto}
 .hero .slide{
   position:absolute;inset:0;display:block;z-index:0;
   opacity:0;visibility:hidden;
