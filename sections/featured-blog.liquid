@@ -1,0 +1,47 @@
+{%- assign blog = section.settings.blog -%}
+{%- if blog != blank and blog.articles_count > 0 -%}
+  <section class="section section--hairline">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow">Journal</p>
+        <h2 class="sec-title display">{{ section.settings.title | escape }}</h2>
+      </div>
+      <a class="sec-link" href="{{ blog.url }}">View all</a>
+    </div>
+    <div class="blog-grid" style="padding:0">
+      {%- for article in blog.articles limit: section.settings.limit -%}
+        <a class="post-card" href="{{ article.url }}">
+          <div class="card-media">
+            {%- if article.image -%}
+              {{ article.image | image_url: width: 900 | image_tag: alt: article.title, loading: 'lazy', widths: '420, 640, 900' }}
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag }}
+            {%- endif -%}
+          </div>
+          <h3>{{ article.title }}</h3>
+          <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%B %d, %Y' }}</time>
+        </a>
+      {%- endfor -%}
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Featured blog",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "Blog posts" },
+    { "type": "blog", "id": "blog", "label": "Blog" },
+    {
+      "type": "range",
+      "id": "limit",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "label": "Posts shown",
+      "default": 3
+    }
+  ],
+  "presets": [{ "name": "Featured blog" }]
+}
+{% endschema %}

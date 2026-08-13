@@ -2,30 +2,104 @@
   "sections": {
     "hero": {
       "type": "hero",
+      "blocks": {
+        "slide-1": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/MILO-BAN-HO-1-small.jpg",
+            "mobile_image": "shopify://shop_images/7.png",
+            "image_position": "center top",
+            "subheading": "Chocolate",
+            "title": "New In",
+            "link": "shopify://collections/new-in",
+            "overlay_position": "center"
+          }
+        },
+        "slide-2": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_5925.png",
+            "mobile_image": "shopify://shop_images/JILLINI-TOP-1_12bed057-0969-4140-9ed8-9a017d7c5134.jpg",
+            "image_position": "center center",
+            "subheading": "Shop",
+            "title": "Summer Sale",
+            "link": "shopify://collections/sale",
+            "overlay_position": "bottom"
+          }
+        }
+      },
+      "block_order": ["slide-1", "slide-2"],
       "settings": {
         "height": "full",
-        "align": "left",
-        "eyebrow": "Jaded Rose · London",
-        "heading": "Timeless design, for the girl who wants it all",
-        "subheading": "Sultry, structured occasionwear — corseted cottons and floor-sweeping gowns, cut in London for every moment worth dressing for.",
-        "cta_label": "Shop new in",
-        "cta2_label": "Explore the sale"
+        "autoplay": true,
+        "autoplay_speed": 7,
+        "show_dots": true
       }
     },
-    "rail": {
-      "type": "collection-rail",
-      "blocks": {
-        "rail-1": { "type": "collection", "settings": { "collection": "off-to-the-races" } },
-        "rail-2": { "type": "collection", "settings": { "collection": "the-graduate" } },
-        "rail-3": { "type": "collection", "settings": { "collection": "holiday-ready" } },
-        "rail-4": { "type": "collection", "settings": { "collection": "bride-to-be" } },
-        "rail-5": { "type": "collection", "settings": { "collection": "birthday-girl" } }
-      },
-      "block_order": ["rail-1", "rail-2", "rail-3", "rail-4", "rail-5"],
+    "brand-band": {
+      "type": "rich-text",
       "settings": {
-        "eyebrow": "Shop by occasion",
-        "heading": "Dressed for the moment",
-        "link_label": "Shop everything"
+        "text": "<p>TIMELESS DESIGN, FOR THE GIRL WHO WANTS IT ALL</p><p><a href=\"/collections/new-in\" title=\"New In\">EXPLORE JADED ROSE</a></p>",
+        "color_bg": "#540016",
+        "color_text": "#FFFFFF"
+      }
+    },
+    "banner": {
+      "type": "image-banner",
+      "settings": {
+        "image": "shopify://shop_images/ABB-SINGLE-7-SMALL.png",
+        "image_position": "center center",
+        "height": "full",
+        "link": "shopify://products/amya-black-sweetheart-bengaline-a-line-mini-dress",
+        "alt_text": "Amya black sweetheart bengaline a-line mini dress"
+      }
+    },
+    "edits": {
+      "type": "hero",
+      "blocks": {
+        "edit-1": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/JR_8711V2.jpg",
+            "mobile_image": "shopify://shop_images/JR_8916_v2.jpg",
+            "image_position": "center center",
+            "title": "The After Party Edit",
+            "button_label": "Shop Now",
+            "link": "shopify://collections/collection-three",
+            "overlay_position": "center"
+          }
+        },
+        "edit-2": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/JR_8509V2.jpg",
+            "mobile_image": "shopify://shop_images/JR_8509V2.jpg",
+            "image_position": "center center",
+            "title": "One Sequin at a Time",
+            "button_label": "Shop Now",
+            "link": "shopify://collections/collection-three",
+            "overlay_position": "center"
+          }
+        },
+        "edit-3": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/JR_8741V2.jpg",
+            "mobile_image": "shopify://shop_images/JR_8741V2_c1e2c78f-d45f-46ce-b8cd-2b10a5ead97d.jpg",
+            "image_position": "center center",
+            "title": "Velvet Dreams",
+            "button_label": "Shop Now",
+            "link": "shopify://collections/collection-three",
+            "overlay_position": "center"
+          }
+        }
+      },
+      "block_order": ["edit-1", "edit-2", "edit-3"],
+      "settings": {
+        "height": "fixed",
+        "autoplay": true,
+        "autoplay_speed": 7,
+        "show_dots": false
       }
     },
     "favourites": {
@@ -35,82 +109,17 @@
         "heading": "Your favourites",
         "collection": "best-sellers",
         "limit": 8,
-        "tint": true
+        "tint": false
       }
     },
-    "editorial": {
-      "type": "editorial",
-      "blocks": {
-        "tile-1": { "type": "tile", "settings": { "caption": "The Romance Edit", "link": "/collections/the-romance-edit" } },
-        "tile-2": { "type": "tile", "settings": { "caption": "The Eden Edit", "link": "/collections/the-eden-edit" } }
-      },
-      "block_order": ["tile-1", "tile-2"],
+    "blog": {
+      "type": "featured-blog",
       "settings": {
-        "eyebrow": "Our story",
-        "quote": "<p>Born out of the love for high quality, and specially curated looks.</p>",
-        "text": "Jaded Rose brings you sultry and authentic pieces that leave you wanting more.",
-        "cta_label": "The brand"
+        "title": "Blog posts",
+        "blog": "jaded-blogs",
+        "limit": 3
       }
-    },
-    "reviews": {
-      "type": "reviews",
-      "blocks": {
-        "rev-1": {
-          "type": "review",
-          "settings": {
-            "quote": "Lovely dress, fits perfectly. Looks exactly like in the picture. Delivery was quick.",
-            "author": "Kerry — Jade Black Corset Midi"
-          }
-        },
-        "rev-2": {
-          "type": "review",
-          "settings": {
-            "quote": "Loved this dress — I actually ordered it as a back up but ended up wearing it. Got so many compliments all day.",
-            "author": "Hannah — Cerra Navy Gown"
-          }
-        },
-        "rev-3": {
-          "type": "review",
-          "settings": {
-            "quote": "Great fit — the bodice complements and slims. Loved the pockets in the skirt too.",
-            "author": "Verified buyer — Jade Olive Midi"
-          }
-        }
-      },
-      "block_order": ["rev-1", "rev-2", "rev-3"],
-      "settings": {
-        "eyebrow": "From the Jaded girls",
-        "heading": "Worn & loved"
-      }
-    },
-    "services": {
-      "type": "services",
-      "blocks": {
-        "svc-1": {
-          "type": "service",
-          "settings": {
-            "title": "Delivery",
-            "text": "Standard delivery is 1–5 working days. Next day delivery available."
-          }
-        },
-        "svc-2": {
-          "type": "service",
-          "settings": {
-            "title": "Returns",
-            "text": "Shop with confidence — full refund or free exchange if the item is unsuitable."
-          }
-        },
-        "svc-3": {
-          "type": "service",
-          "settings": {
-            "title": "Fit",
-            "text": "UK sizes 6–18, measured in inches and centimetres."
-          }
-        }
-      },
-      "block_order": ["svc-1", "svc-2", "svc-3"],
-      "settings": {}
     }
   },
-  "order": ["hero", "rail", "favourites", "editorial", "reviews", "services"]
+  "order": ["hero", "brand-band", "banner", "edits", "favourites", "blog"]
 }

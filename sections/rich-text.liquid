@@ -1,0 +1,23 @@
+<section
+  class="rich-band"
+  style="background:{{ section.settings.color_bg | default: '#540016' }};color:{{ section.settings.color_text | default: '#FFFFFF' }};"
+>
+  <div class="rte">{{ section.settings.text }}</div>
+</section>
+
+{% schema %}
+{
+  "name": "Rich text band",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>TIMELESS DESIGN, FOR THE GIRL WHO WANTS IT ALL</p>"
+    },
+    { "type": "color", "id": "color_bg", "label": "Background", "default": "#540016" },
+    { "type": "color", "id": "color_text", "label": "Text colour", "default": "#FFFFFF" }
+  ],
+  "presets": [{ "name": "Rich text band" }]
+}
+{% endschema %}

@@ -62,6 +62,43 @@
     b.addEventListener('click', function () { b.parentElement.classList.toggle('is-open'); });
   });
 
+  /* ---------- slideshows ---------- */
+  $$('[data-slideshow]').forEach(function (show) {
+    var slides = $$('[data-slide]', show);
+    if (slides.length < 2) return;
+    var dotsWrap = $('[data-slide-dots]', show);
+    var dots = [];
+    var i = 0;
+    var timer = null;
+    function go(n) {
+      slides[i].classList.remove('is-on');
+      if (dots[i]) dots[i].classList.remove('is-on');
+      i = (n + slides.length) % slides.length;
+      slides[i].classList.add('is-on');
+      if (dots[i]) dots[i].classList.add('is-on');
+    }
+    var speed = (parseFloat(show.getAttribute('data-autoplay')) || 0) * 1000;
+    function restart() {
+      if (!speed) return;
+      clearInterval(timer);
+      timer = setInterval(function () { go(i + 1); }, speed);
+    }
+    if (dotsWrap) {
+      slides.forEach(function (_, n) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.setAttribute('aria-label', 'Go to slide ' + (n + 1));
+        if (n === 0) b.classList.add('is-on');
+        b.addEventListener('click', function () { go(n); restart(); });
+        dotsWrap.appendChild(b);
+        dots.push(b);
+      });
+    }
+    show.addEventListener('mouseenter', function () { clearInterval(timer); });
+    show.addEventListener('mouseleave', restart);
+    restart();
+  });
+
   /* ---------- cart helpers ---------- */
   function updateBagCount(count) {
     $$('[data-bag-count]').forEach(function (el) {
