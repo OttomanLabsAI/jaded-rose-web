@@ -1,0 +1,54 @@
+    {%comment%}addVar:sb_product_custom_ids{%endcomment%}
+      {% capture sb_product_custom_ids %}
+          {%comment%}sb_product_custom_ids{%endcomment%}|7431842005244|7431878443260|7431902986492|{%comment%}end:sb_product_custom_ids{%endcomment%}
+      {% endcapture %}
+    {%comment%}end:addVar:sb_product_custom_ids{%endcomment%}
+    
+    
+    {%comment%}addVar:sb_collection_custom_ids{%endcomment%}
+      {% capture sb_collection_custom_ids %}
+          {%comment%}sb_collection_custom_ids{%endcomment%}|375776608508|{%comment%}end:sb_collection_custom_ids{%endcomment%}
+      {% endcapture %}
+    {%comment%}end:addVar:sb_collection_custom_ids{%endcomment%}
+    
+    {%comment%}addVar:sb_blog_custom_ids{%endcomment%}
+      {% capture sb_blog_custom_ids %}
+          {%comment%}sb_blog_custom_ids{%endcomment%}|{%comment%}end:sb_blog_custom_ids{%endcomment%}
+      {% endcapture %}
+    {%comment%}end:addVar:sb_blog_custom_ids{%endcomment%}
+    
+    {%comment%}addVar:sb_page_custom_ids{%endcomment%}
+      {% capture sb_page_custom_ids %}
+          {%comment%}sb_page_custom_ids{%endcomment%}|{%comment%}end:sb_page_custom_ids{%endcomment%}
+      {% endcapture %}
+    {%comment%}end:addVar:sb_page_custom_ids{%endcomment%}
+    
+    {%comment%}addVar:sb_article_custom_ids{%endcomment%}
+      {% capture sb_article_custom_ids %}
+          {%comment%}sb_article_custom_ids{%endcomment%}|{%comment%}end:sb_article_custom_ids{%endcomment%}
+      {% endcapture %}
+    {%comment%}end:addVar:sb_article_custom_ids{%endcomment%}
+    
+    
+    {%comment%}checkExistID:sb_manual_seo_check_ids{%endcomment%}
+      {%- if template contains "product" -%}
+          {% capture sb_check_id %}{{ "|" }}{{product.id}}{{ "|" }}{% endcapture %}
+          {% assign sb_manual_seo_check_ids = sb_product_custom_ids | split: sb_check_id %}
+      {%- elsif template contains "collection" -%}
+          {% capture sb_check_id %}{{ "|" }}{{collection.id}}{{ "|" }}{% endcapture %}
+          {% assign sb_manual_seo_check_ids = sb_collection_custom_ids | split: sb_check_id %}
+      {%- elsif template contains "blog" -%}
+          {% capture sb_check_id %}{{ "|" }}{{blog.id}}{{ "|" }}{% endcapture %}
+          {% assign sb_manual_seo_check_ids = sb_blog_custom_ids | split: sb_check_id %}
+      {%- elsif template contains "page" -%}
+          {% capture sb_check_id %}{{ "|" }}{{page.id}}{{ "|" }}{% endcapture %}
+          {% assign sb_manual_seo_check_ids = sb_page_custom_ids | split: sb_check_id %}
+      {%- elsif template contains "article" -%}
+          {% capture sb_check_id %}{{ "|" }}{{article.id}}{{ "|" }}{% endcapture %}
+          {% assign sb_manual_seo_check_ids = sb_article_custom_ids | split: sb_check_id %}
+      {%- endif -%}
+    {%comment%}end:checkExistID:sb_manual_seo_check_ids{%endcomment%}
+    
+    {%- if sb_manual_seo_check_ids and sb_manual_seo_check_ids.size >1 -%}
+      1
+    {%- endif -%}

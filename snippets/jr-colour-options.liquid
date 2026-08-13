@@ -1,0 +1,71 @@
+{%- comment -%}
+  Jaded Rose — colour selection across sibling products.
+
+  Lets shoppers switch between colours of the same dress when each
+  colour is a separate product. Link them via a product metafield:
+
+    custom.colour_options  (list of product references)
+      — the other colour versions of this product
+    custom.colour_name     (single line text, optional)
+      — this product's colour label, e.g. "Burgundy"
+
+  Renders nothing when custom.colour_options is empty, leaving the
+  page exactly as the theme shipped.
+{%- endcomment -%}
+
+{%- liquid
+  assign colour_siblings = product.metafields.custom.colour_options.value
+  assign sibling_count = colour_siblings | size
+-%}
+
+{%- if sibling_count > 0 -%}
+  {%- assign current_colour = product.metafields.custom.colour_name.value -%}
+  <div class="jr-colour-options product-detail__gap-lg">
+    <div class="jr-colour-options__label">
+      Colour{% if current_colour != blank %}: <strong>{{ current_colour }}</strong>{% endif %}
+    </div>
+    <ul class="jr-colour-options__list" role="list">
+      <li class="jr-colour-options__item is-current">
+        <span title="{{ current_colour | default: product.title | escape }}">
+          {%- if product.featured_image -%}
+            <img
+              src="{{ product.featured_image | image_url: width: 160 }}"
+              alt="{{ current_colour | default: product.title | escape }}"
+              width="54"
+              height="70"
+              loading="lazy"
+            >
+          {%- endif -%}
+        </span>
+      </li>
+      {%- for sibling in colour_siblings -%}
+        {%- unless sibling.id == product.id -%}
+          {%- assign sib_colour = sibling.metafields.custom.colour_name.value | default: sibling.title -%}
+          <li class="jr-colour-options__item">
+            <a href="{{ sibling.url }}" title="{{ sib_colour | escape }}" aria-label="Colour: {{ sib_colour | escape }}">
+              {%- if sibling.featured_image -%}
+                <img
+                  src="{{ sibling.featured_image | image_url: width: 160 }}"
+                  alt="{{ sib_colour | escape }}"
+                  width="54"
+                  height="70"
+                  loading="lazy"
+                >
+              {%- endif -%}
+            </a>
+          </li>
+        {%- endunless -%}
+      {%- endfor -%}
+    </ul>
+  </div>
+  <style>
+    .jr-colour-options__label{font-size:.85em;letter-spacing:.05em;margin-bottom:8px}
+    .jr-colour-options__list{list-style:none;display:flex;flex-wrap:wrap;gap:10px;margin:0 0 4px;padding:0}
+    .jr-colour-options__item a,
+    .jr-colour-options__item span{display:block;width:54px;height:70px;overflow:hidden;border:1px solid rgba(0,0,0,.15);transition:border-color .2s}
+    .jr-colour-options__item img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+    .jr-colour-options__item a:hover{border-color:rgba(0,0,0,.6)}
+    .jr-colour-options__item.is-current a,
+    .jr-colour-options__item.is-current span{border:2px solid #212121}
+  </style>
+{%- endif -%}

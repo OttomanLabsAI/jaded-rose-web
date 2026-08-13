@@ -1,0 +1,68 @@
+
+{%- if template contains "404" -%}
+
+{%- elsif template contains "index" -%}
+
+{% capture secomapp_index %}Jaded Rose | Official Site | Shop Women's Dresses | Party Wear{% endcapture %}
+<title>{{ secomapp_index | strip_html | strip | strip_newlines | replace: '"', "'" }}</title>
+
+{%- elsif template contains "product" -%}
+
+{% capture secomapp_product %}
+{%-if sb_res_check_custom_ids -%}
+                {{ product.metafields.seo_booster.sb_title }}
+                {%-else-%}
+                    {%comment%}bulk_edit_seo_product_title{%endcomment%}{{ page_title | strip}}{%comment%}end:bulk_edit_seo_product_title{%endcomment%}
+                {%- endif -%}
+{% endcapture %}
+{% case secomapp_product %}
+  {% when ' ' %}
+   <title>{{ page_title }}</title>
+  {% when '' %}
+    <title>{{ page_title }}</title>
+  {% when false %}
+    <title>{{ page_title }}</title>
+  {% else %}
+  <title>{{ secomapp_product | strip_html | strip | strip_newlines | replace: '"', "'"}}</title>
+{% endcase %}
+
+{%- elsif template contains "collection" -%}
+
+{% capture secomapp_collection %} {%-if sb_res_check_custom_ids -%}
+                                             {{ collection.metafields.seo_booster.sb_title }}
+                                         {%-else-%}
+                                                             {%comment%}bulk_edit_seo_collection_title{%endcomment%}{{ collection.title  | strip}} | {{ shop.name  | strip }}{%comment%}end:bulk_edit_seo_collection_title{%endcomment%}
+                                         {%- endif -%}{% endcapture %}
+{% case secomapp_collection %}
+  {% when ' ' %}
+   <title>{{ page_title }}</title>
+  {% when '' %}
+    <title>{{ page_title }}</title>
+  {% when false %}
+    <title>{{ page_title }}</title>
+  {% else %}
+   <title>{{ secomapp_collection | strip_html | strip | strip_newlines | replace: '"', "'"}}</title>
+{% endcase %}
+
+{%- elsif template contains "blog" -%}
+
+{% capture secomapp_blog %}{{ page_title | strip}} {% endcapture %}
+<title>{{ secomapp_blog | strip_html | strip | strip_newlines | replace: '"', "'" }}</title>
+
+{%- elsif template contains "article" -%}
+
+{% capture secomapp_article %} 
+
+   {%-if sb_res_check_custom_ids -%}
+          {{ article.metafields.seo_booster.sb_title }}
+      {%-else-%}
+          {%comment%}bulk_edit_seo_article_title{%endcomment%} {{ page_title | strip }} {%comment%}end:bulk_edit_seo_article_title{%endcomment%}
+    {%- endif -%}
+ {% endcapture %}
+<title>{{ secomapp_article | strip_html | strip | strip_newlines | replace: '"', "'"}}</title>
+
+{% else %}
+{% capture secomapp_other %}{{ page_title }}{% endcapture %}
+<title>{{ secomapp_other | strip_html | strip | strip_newlines | replace: '"', "'"}}</title>
+
+{%- endif -%}

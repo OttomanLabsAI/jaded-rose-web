@@ -1,13 +1,15 @@
-{%- comment -%} Price display. Accepts: product. {%- endcomment -%}
-{%- if product.compare_at_price > product.price -%}
-  <span class="price price--sale">
-    {%- if product.price_varies %}From {% endif -%}
-    {{ product.price | money }}
-  </span>
-  <s class="price-was">{{ product.compare_at_price | money }}</s>
+{%- liquid
+  assign show_currency_code = settings.currency_code_enabled
+
+  if disable_currency_code
+    assign show_currency_code = false
+  elsif is_total_price
+    assign show_currency_code = settings.cart_currency_code_enabled
+  endif
+-%}
+
+{%- if show_currency_code -%}
+  {{- price | money_with_currency -}}
 {%- else -%}
-  <span class="price">
-    {%- if product.price_varies %}From {% endif -%}
-    {{ product.price | money }}
-  </span>
+  {{- price | money -}}
 {%- endif -%}

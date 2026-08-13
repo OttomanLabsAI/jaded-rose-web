@@ -1,6 +1,1 @@
-{
-  "sections": {
-    "main": { "type": "main-blog" }
-  },
-  "order": ["main"]
-}
+{"sections":{"rich_text_9nqeCg":{"type":"rich-text","settings":{"subheading":"","title":"Jaded Blogs","title_size":48,"heading_h1":true,"text":"<p>Let's Catch Up : On All Things Fashion, News, And New Drops<\/p>","image_width":210,"button_label":"","button_link":"","button_style":"auto","text_alignment":"center","enlarge_text":false,"full_width":false,"no_padding_bottom":false,"color_scheme":"standard","color_bg":"#b79987","color_text":"#423f3f"}},"main":{"type":"main-blog","settings":{"blog_layout":"collage","blog_posts_per_page":20,"blog_posts_per_row_mobile":"2","blog_show_title":false,"blog_show_filter":true,"blog_show_rss_link":false}}},"order":["rich_text_9nqeCg","main"]}

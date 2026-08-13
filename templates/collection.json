@@ -1,6 +1,1 @@
-{
-  "sections": {
-    "main": { "type": "main-collection" }
-  },
-  "order": ["main"]
-}
+{"sections":{"rich_text_Vf6FrF":{"type":"rich-text","disabled":true,"custom_css":[".feature-subheader {font-size: 42px; font-weight: 600px;}",".metafield-rich_text_field {overflow: hidden; max-height: 100%; \/* Adjust this value based on how much text you want visible initially *\/ position: relative;}",".show-more-btn {display: inline-block; margin-top: 10px; cursor: pointer; color: #007bff; text-decoration: underline;}",".toggle-btn {cursor: pointer; color: #000000; text-decoration: underline;}"],"settings":{"subheading":"{{ collection.title }}","title":"","title_size":48,"heading_h1":true,"text":"{{ collection.metafields.custom.description_1 | metafield_tag }}<p><\/p>","image_width":120,"button_label":"","button_link":"","button_style":"auto","text_alignment":"center","enlarge_text":false,"full_width":false,"no_padding_bottom":true,"color_scheme":"standard","color_bg":"","color_text":""}},"main":{"type":"main-collection","settings":{"show_collection_content":true,"show_collection_image":false,"description_position":"top","layout":"rows","grid":3,"grid_mobile":"2","products_per_page":18,"enable_infinite_scroll":true,"show_vendor":false,"show_filter_counts":false,"show_filter_deadends":false,"ajax_products":true,"filter_mode":"sidebar","sticky_sidebar":true,"collapse_filters_method":"all","collapse_sort_by":true,"enable_sorting":true,"show_featured_in_sort":false}}},"order":["rich_text_Vf6FrF","main"]}

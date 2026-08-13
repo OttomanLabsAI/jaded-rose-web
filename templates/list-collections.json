@@ -1,6 +1,1 @@
-{
-  "sections": {
-    "main": { "type": "main-list-collections" }
-  },
-  "order": ["main"]
-}
+{"sections":{"main":{"type":"main-list-collections","blocks":{"image_a8E7Hn":{"type":"image","settings":{"collection":"the-dusk-edit"}},"image_xbNJgA":{"type":"image","settings":{"collection":"wild-edit"}},"image_XwUhww":{"type":"image","settings":{"collection":"collection-2"}},"image_FNUzzX":{"type":"image","settings":{"collection":"collectionone"}},"image_b6nX6E":{"type":"image","settings":{"collection":"midnight"}},"image_PTbLwK":{"type":"image","settings":{"collection":"edit-deux"}},"image_4DWC4c":{"type":"image","settings":{"collection":"signature"}},"image_hKPaj6":{"type":"image","settings":{"collection":"collection-three"}}},"block_order":["image_a8E7Hn","image_xbNJgA","image_XwUhww","image_FNUzzX","image_b6nX6E","image_PTbLwK","image_4DWC4c","image_hKPaj6"],"settings":{"title":"Collections","layout":"rows","grid":3,"collections_per_page":24,"display_type":"selected"}}},"order":["main"]}

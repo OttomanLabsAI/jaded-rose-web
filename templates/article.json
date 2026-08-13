@@ -1,6 +1,1 @@
-{
-  "sections": {
-    "main": { "type": "main-article" }
-  },
-  "order": ["main"]
-}
+{"sections":{"main":{"type":"main-article","settings":{"featured_image":"wide","blog_show_author":false,"blog_show_date":true,"blog_show_social":true}}},"order":["main"]}

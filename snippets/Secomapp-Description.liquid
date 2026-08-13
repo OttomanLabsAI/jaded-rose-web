@@ -1,0 +1,70 @@
+
+{%- if template contains "404" -%}
+{%- elsif template contains "index" -%}
+{% capture secomapp_index_s %}Jaded Rose is your first stop for the latest fashion and trends in womenswear. Inspired by Haute Couture and specialising in signature corsetry dresses and beautiful on trend sequin styles{% endcapture %}
+<meta name="description" content="{{secomapp_index_s | strip_html | strip | strip_newlines | replace: '"', "'"}}">
+
+{%- elsif template contains "product" -%}
+
+{% capture secomapp_product_s %}
+ {%-if sb_res_check_custom_ids -%}
+    {{ product.metafields.seo_booster.sb_description }}
+    {%-else-%}
+    {%comment%}bulk_edit_seo_product_des{%endcomment%}{{ page_description | strip_html | strip}}{%comment%}end:bulk_edit_seo_product_des{%endcomment%}
+    {%- endif -%}
+ {% endcapture %}
+
+{% case secomapp_product_s %}
+  {% when ' ' %}
+   <meta name="description" content="{{page_description}}">
+  {% when '' %}
+    <meta name="description" content="{{page_description}}">
+  {% when false %}
+    <meta name="description" content="{{page_description}}">
+  {% else %}
+   <meta name="description" content="{{secomapp_product_s | strip_html | strip | strip_newlines | replace: '"', "'"}}">
+{% endcase %}
+
+{%- elsif template contains "collection" -%}
+
+{% capture secomapp_collection_s %}
+ {%-if sb_res_check_custom_ids -%}
+     {{ collection.metafields.seo_booster.sb_description }}
+     {%-else-%}
+     {%comment%}bulk_edit_seo_collection_des{%endcomment%}{{ collection.description | strip_html  | strip}} {{ shop.name  | strip }}{%comment%}end:bulk_edit_seo_collection_des{%endcomment%}
+     {%- endif -%}
+ {% endcapture %}
+{% case secomapp_collection_s %}
+  {% when ' ' %}
+   <meta name="description" content="{{page_description}}">
+  {% when '' %}
+    <meta name="description" content="{{page_description}}">
+  {% when false %}
+    <meta name="description" content="{{page_description}}">
+  {% else %}
+  <meta name="description" content="{{secomapp_collection_s | strip_html | strip | strip_newlines | replace: '"', "'"}}">
+{% endcase %}
+
+{%- elsif template contains "blog" -%}
+
+{% capture secomapp_blog_s %}{{ page_description | strip}} {% endcapture %}
+<meta name="description" content="{{ secomapp_blog_s | strip_html | strip | strip_newlines | replace: '"', "'"}}">
+
+{%- elsif template contains "article" -%}
+
+{% capture secomapp_article_s %} 
+ {%-if sb_res_check_custom_ids -%}
+                        {{ article.metafields.seo_booster.sb_description }}
+                    {%-else-%}
+                        {%comment%}bulk_edit_seo_article_description{%endcomment%}  {{ page_description | strip}} {%comment%}end:bulk_edit_seo_article_description{%endcomment%}
+                    {%- endif -%}
+
+{% endcapture %}
+<meta name="description" content="{{ secomapp_article_s | strip_html | strip | strip_newlines | replace: '"', "'"}}">
+
+
+{% else %}
+{% capture secomapp_other_s %}{{ page_description | strip_html | strip}} {% endcapture %}
+<meta name="description" content="{{ secomapp_other_s | strip_html | strip | strip_newlines | replace: '"', "'"}}">
+
+{%- endif -%}
