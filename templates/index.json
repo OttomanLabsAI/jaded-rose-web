@@ -15,11 +15,11 @@
     "rail": {
       "type": "collection-rail",
       "blocks": {
-        "rail-1": { "type": "collection" },
-        "rail-2": { "type": "collection" },
-        "rail-3": { "type": "collection" },
-        "rail-4": { "type": "collection" },
-        "rail-5": { "type": "collection" }
+        "rail-1": { "type": "collection", "settings": { "collection": "off-to-the-races" } },
+        "rail-2": { "type": "collection", "settings": { "collection": "the-graduate" } },
+        "rail-3": { "type": "collection", "settings": { "collection": "holiday-ready" } },
+        "rail-4": { "type": "collection", "settings": { "collection": "bride-to-be" } },
+        "rail-5": { "type": "collection", "settings": { "collection": "birthday-girl" } }
       },
       "block_order": ["rail-1", "rail-2", "rail-3", "rail-4", "rail-5"],
       "settings": {
@@ -33,6 +33,7 @@
       "settings": {
         "eyebrow": "Best sellers",
         "heading": "Your favourites",
+        "collection": "best-sellers",
         "limit": 8,
         "tint": true
       }

@@ -8,14 +8,20 @@
         <h2 class="sec-title display">{{ section.settings.heading | escape }}</h2>
       {%- endif -%}
     </div>
-    {%- if section.settings.collection != blank -%}
-      <a class="sec-link" href="{{ section.settings.collection.url }}">View all</a>
-    {%- endif -%}
+    <a class="sec-link" href="{{ section.settings.collection.url | default: routes.all_products_collection_url }}">View all</a>
   </div>
 
+  {%- liquid
+    # Fall back to the automatic “All products” collection when none is assigned,
+    # so the grid populates itself on a fresh install.
+    assign source = section.settings.collection
+    if source == blank
+      assign source = collections['all']
+    endif
+  -%}
   <div class="grid">
-    {%- if section.settings.collection != blank -%}
-      {%- for product in section.settings.collection.products limit: section.settings.limit -%}
+    {%- if source.products.size > 0 -%}
+      {%- for product in source.products limit: section.settings.limit -%}
         {% render 'product-card', product: product %}
       {%- endfor -%}
     {%- else -%}

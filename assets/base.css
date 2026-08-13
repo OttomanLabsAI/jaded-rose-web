@@ -1,19 +1,21 @@
 /* ============================================================
    JADED ROSE — Shopify theme
-   Design language: porcelain minimalism — hairline rules,
+   Design language: ivory minimalism — hairline rules,
    micro-caps labels, editorial serif, image-led product cards.
-   Type : Cormorant Garamond (display) · Jost (UI / body)
+   Brand : Ivory #F6F1E8 · Chalk #FDFBF6 · Ink #181310
+           Bordeaux #5E1F2A · Bone line #E3D9C9
+   Type  : Italiana (display) · Jost (UI / body)
    ============================================================ */
 
 :root{
-  --paper:#FFFFFF;
-  --porcelain:#F7F4F0;
-  --ink:#161311;
+  --paper:#F6F1E8;
+  --porcelain:#FDFBF6;
+  --ink:#181310;
   --accent:#5E1F2A;
-  --soft:#59524B;
-  --muted:#8D857C;
-  --line:#E9E3DA;
-  --font-display:'Cormorant Garamond', serif;
+  --soft:#3A322C;
+  --muted:#8A7E70;
+  --line:#E3D9C9;
+  --font-display:'Italiana', serif;
   --font-ui:'Jost', sans-serif;
   --ease:cubic-bezier(.22,.7,.25,1);
   --pad:clamp(20px, 4.5vw, 64px);
@@ -45,7 +47,11 @@ ul{list-style:none}
   font-weight:400;color:var(--muted);
 }
 .display{
-  font-family:var(--font-display);font-weight:400;line-height:1.08;letter-spacing:.005em;
+  font-family:var(--font-display);font-weight:400;line-height:1.06;letter-spacing:.01em;
+}
+/* Italiana carries the brand voice in caps on structural headings */
+.hero-title,.sec-title,.product-title,.account-title,.article-title,.svc h3,.empty-note .display{
+  text-transform:uppercase;
 }
 .rte{max-width:70ch}
 .rte p{margin-bottom:1em}

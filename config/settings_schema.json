@@ -34,19 +34,19 @@
         "type": "color",
         "id": "color_background",
         "label": "Background",
-        "default": "#FFFFFF"
+        "default": "#F6F1E8"
       },
       {
         "type": "color",
         "id": "color_secondary_background",
         "label": "Secondary background",
-        "default": "#F7F4F0"
+        "default": "#FDFBF6"
       },
       {
         "type": "color",
         "id": "color_text",
         "label": "Text",
-        "default": "#161311"
+        "default": "#181310"
       },
       {
         "type": "color",
