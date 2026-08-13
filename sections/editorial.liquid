@@ -24,8 +24,11 @@
               sizes: '(max-width: 1080px) 50vw, 25vw',
               widths: '420, 640, 900'
             }}
+          {%- elsif forloop.first -%}
+            {%- comment -%} Brand defaults — imagery from the store's CDN {%- endcomment -%}
+            <img src="https://jadedrose.co.uk/cdn/shop/files/DALINA-IVORY-1_1200x1200.jpg?v=1753094985" alt="{{ block.settings.caption | escape | default: 'Editorial' }}" width="960" height="1200" loading="lazy">
           {%- else -%}
-            {{ 'lifestyle-1' | placeholder_svg_tag }}
+            <img src="https://jadedrose.co.uk/cdn/shop/files/DAISY-SKIRT-1-jpg_1200x1200.jpg?v=1761830225" alt="{{ block.settings.caption | escape | default: 'Editorial' }}" width="960" height="1200" loading="lazy">
           {%- endif -%}
           {%- if block.settings.caption != blank -%}
             <figcaption>{{ block.settings.caption | escape }}</figcaption>

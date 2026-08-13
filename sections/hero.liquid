@@ -7,17 +7,26 @@
   endif
 -%}
 
-<section class="hero {{ height_class }} {% unless section.settings.image %}hero--plain{% endunless %}">
-  {%- if section.settings.image -%}
-    <div class="hero-media">
+<section class="hero {{ height_class }}">
+  <div class="hero-media">
+    {%- if section.settings.image -%}
       {{ section.settings.image | image_url: width: 2400 | image_tag:
         alt: section.settings.image.alt | default: section.settings.heading,
         sizes: '100vw',
         widths: '750, 1100, 1600, 2000, 2400',
         fetchpriority: 'high'
       }}
-    </div>
-  {%- endif -%}
+    {%- else -%}
+      {%- comment -%} Brand default — Edith burgundy gown from the store's CDN {%- endcomment -%}
+      <img
+        src="https://jadedrose.co.uk/cdn/shop/files/EDITH-BURGUNDY-4-jpg_1200x1200.jpg?v=1761567143"
+        alt="{{ section.settings.heading | escape }}"
+        width="960"
+        height="1200"
+        fetchpriority="high"
+      >
+    {%- endif -%}
+  </div>
 
   <div class="hero-inner {% if section.settings.align == 'center' %}hero-inner--center{% endif %}">
     {%- if section.settings.eyebrow != blank -%}

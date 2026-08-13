@@ -5,7 +5,7 @@
         {%- if settings.logo -%}
           {{ settings.logo | image_url: width: 400 | image_tag: alt: shop.name, width: 130 }}
         {%- else -%}
-          <span class="brand-word display">{{ shop.name }}</span>
+          <img src="https://jadedrose.co.uk/cdn/shop/files/Untitled-2_500x.png?v=1751544281" alt="{{ shop.name | escape }}" width="130" height="39" loading="lazy">
         {%- endif -%}
       </div>
       <h4>{{ section.settings.newsletter_heading | escape }}</h4>
